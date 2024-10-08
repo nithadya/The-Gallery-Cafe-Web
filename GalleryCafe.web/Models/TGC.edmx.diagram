@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2f5d01a4b78f41ab90d25322da491555" Name="Diagram1">
+        <EntityTypeShape EntityType="galleryCafe_dbModel.Menu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="galleryCafe_dbModel.Order" Width="1.5" PointX="5.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="galleryCafe_dbModel.Reservation" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="galleryCafe_dbModel.User" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="galleryCafe_dbModel.FK__Orders__MenuItem__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="galleryCafe_dbModel.FK__Orders__UserId__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="galleryCafe_dbModel.FK__Reservati__UserI__45F365D3" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

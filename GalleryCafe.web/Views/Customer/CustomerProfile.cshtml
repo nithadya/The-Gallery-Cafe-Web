@@ -1,0 +1,249 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - Customer</title>
+
+    <!-- jQuery (necessary for DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap CSS (Bootstrap 5) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- DataTables CSS for table styling -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link href="~/Content/Dashbord.css" rel="stylesheet" />
+    <style>
+                :root {
+            --peru: #fc7f09;
+            --black: #222;
+            --white: #fff;
+            --light-black: #666;
+            --light-white: #ccc;
+            --light-bg: #f5f5f5;
+            --dark-bg: rgba(0, 0, 0, 0.7);
+            --border: 1rem solid #aaa;
+            --secondary-color: #ff9f1c;
+            --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, 0.15);
+            --button-hover-color: #f5b041;
+            --border-radius: 12px;
+            --transition-speed: 0.3s;
+            --card-bg-gradient: linear-gradient(145deg, #ff9f1c, #fc7f09);
+            --radius-24: 24px;
+            --radius-circle: 50%;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--black);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .profile-card {
+            background-color: var(--white);
+            border-radius: var(--radius-24);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 400px;
+            text-align: center;
+            transition: all var(--transition-speed) ease-in-out;
+        }
+
+        .profile-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--secondary-color);
+        }
+
+        .avatar {
+            background-color: var(--peru);
+            border-radius: var(--radius-circle);
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .profile-info {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .logout-btn {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 2rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
+        }
+
+        .logout-btn:hover {
+            background-color: var(--button-hover-color);
+        }
+    </style>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="~/Home/Index">The Gallery Cafe</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="~/Customer/CustomerHome">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="~/Customer/CustomerProfile">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Profile
+                        </a>
+                        <a class="nav-link" href="~/Customer/CustomerReservation">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Reservation
+                        </a>
+                        <a class="nav-link" href="~/Customer/CustomerOders">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Orders
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Customer
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+
+            <div class="container mt-5" >
+                <div class="profile-card">
+                    <div class="avatar" id="avatar">
+                        <span id="avatar-initials">U</span> <!-- Default avatar initials -->
+                    </div>
+                    <div class="profile-info">
+                        <p id="username"></p>
+                        <p id="email"></p>
+                        <p id="role"></p>
+                    </div>
+                    <button class="logout-btn" id="logout-btn">Logout</button>
+                </div>
+            </div>
+
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; The Gallery Cafe Developed by Mihisara 2024</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Bootstrap JS Bundle (Bootstrap 5) with Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS for table functionality -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables Responsive JS for responsive tables -->
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <!-- Chart.js for charts and data visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/customer.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Fetch the logged-in user's data using AJAX
+            $.ajax({
+                url: '@Url.Action("GetCurrentUser", "Account")', // Calls the GetCurrentUser action in AccountController
+                method: 'GET',
+                success: function (response) {
+                    if (response.success) {
+                        // Display user data
+                        $('#username').text(response.data.username);
+                        $('#email').text(response.data.role);
+                        $('#role').text(response.data.role);
+
+                        // Set avatar initials (First letter of the username)
+                        let initials = response.data.username.charAt(0).toUpperCase();
+                        $('#avatar-initials').text(initials);
+                    } else {
+                        // Redirect to login if no user is logged in
+                        window.location.href = '@Url.Action("Login", "Account")';
+                    }
+                },
+                error: function () {
+                    alert("Failed to retrieve user data.");
+                }
+            });
+
+            // Logout function
+            $('#logout-btn').click(function () {
+                $.ajax({
+                    url: '@Url.Action("Logout", "Account")',
+                    method: 'POST',
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = '@Url.Action("Login", "Account")';
+                        } else {
+                            alert("Logout failed. Try again.");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+

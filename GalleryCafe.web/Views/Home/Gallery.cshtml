@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "Gallery";
+}
+
+@section Styles {
+    <link href="~/Content/home.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="preload">
+    <div class="circle"></div>
+    <div class="text">Loading</div>
+</div>
+
+<section class="gallery-section">
+    <div class="container">
+        <h2 class="heading">Explore Our Gallery</h2>
+        <h3 class="sub-heading">Sri Lankan & Indian Foods</h3>
+        <div class="row gallery">
+            <!-- Sri Lankan Food -->
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/srilankan1.jpg" class="glightbox" data-gallery="srilankan" data-title="Sri Lankan Dish 1">
+                    <img src="~/Content/img/layouts/11.png" class="img-fluid gallery-img" alt="Sri Lankan Dish 1">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/srilankan2.jpg" class="glightbox" data-gallery="srilankan" data-title="Sri Lankan Dish 2">
+                    <img src="~/Content/img/layouts/12.png" class="img-fluid gallery-img" alt="Sri Lankan Dish 2">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/srilankan3.jpg" class="glightbox" data-gallery="srilankan" data-title="Sri Lankan Dish 3">
+                    <img src="~/Content/img/layouts/13.png" class="img-fluid gallery-img" alt="Sri Lankan Dish 3">
+                </a>
+            </div>
+            <!-- Indian Food -->
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/indian1.jpg" class="glightbox" data-gallery="indian" data-title="Indian Dish 1">
+                    <img src="~/Content/img/layouts/14.png" class="img-fluid gallery-img" alt="Indian Dish 1">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/indian2.jpg" class="glightbox" data-gallery="indian" data-title="Indian Dish 2">
+                    <img src="~/Content/img/layouts/15.png" class="img-fluid gallery-img" alt="Indian Dish 2">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/indian3.jpg" class="glightbox" data-gallery="indian" data-title="Indian Dish 3">
+                    <img src="~/Content/img/layouts/16.png" class="img-fluid gallery-img" alt="Indian Dish 3">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/indian3.jpg" class="glightbox" data-gallery="indian" data-title="Indian Dish 3">
+                    <img src="~/Content/img/layouts/13png" class="img-fluid gallery-img" alt="Indian Dish 3">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/indian3.jpg" class="glightbox" data-gallery="indian" data-title="Indian Dish 3">
+                    <img src="~/Content/img/layouts/11.png" class="img-fluid gallery-img" alt="Indian Dish 3">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/indian3.jpg" class="glightbox" data-gallery="indian" data-title="Indian Dish 3">
+                    <img src="~/Content/img/layouts/15.png" class="img-fluid gallery-img" alt="Indian Dish 3">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/indian3.jpg" class="glightbox" data-gallery="indian" data-title="Indian Dish 3">
+                    <img src="~/Content/img/layouts/14.png" class="img-fluid gallery-img" alt="Indian Dish 3">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/indian3.jpg" class="glightbox" data-gallery="indian" data-title="Indian Dish 3">
+                    <img src="~/Content/img/layouts/13.png" class="img-fluid gallery-img" alt="Indian Dish 3">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/indian3.jpg" class="glightbox" data-gallery="indian" data-title="Indian Dish 3">
+                    <img src="~/Content/img/layouts/12.png" class="img-fluid gallery-img" alt="Indian Dish 3">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="~/Content/img/indian3.jpg" class="glightbox" data-gallery="indian" data-title="Indian Dish 3">
+                    <img src="~/Content/img/layouts/111.png" class="img-fluid gallery-img" alt="Indian Dish 3">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Initialize GLightbox -->
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+    const lightbox = GLightbox({
+        touchNavigation: true,         
+        loop: true,                   
+        zoomable: true,               
+        moreText: 'More Info',         
+        openEffect: 'fade',            
+        closeEffect: 'fade',           
+        resizeDuration: 200,          
+        slideEffect: 'fade',           
+        fadeDuration: 600,             
+        closeOnOutsideClick: true,     
+        autoplayVideos: true           
+    });
+</script>
+<script>
+    window.addEventListener('load', () => {
+        document.querySelector('.preload').classList.add('loaded');
+    });
+</script>

@@ -4,39 +4,216 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Leaflet.js CSS for the Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Smooth Scroll Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.3/smooth-scroll.polyfills.min.js"></script>
+    @Scripts.Render("~/bundles/modernizr")
+     <style>
+         .user-dropdown {
+    position: relative; 
+}
+
+.dropdown-menu {
+    position: absolute;
+    background-color: white; 
+    border: 1px solid #ccc; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+    z-index: 1000; 
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-item {
+    padding: 8px 12px; 
+    text-decoration: none; 
+    color: #333;
+    display: block; 
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1; 
+}
+
+.dropdown-item a {
+    color: #007bff;
+    text-decoration: none; 
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.dropdown-item a:hover {
+    background-color: #f0f0f0;
+    color: #0056b3; 
+}
+     </style>
+   
+</head>
+<body>
+    @*---Header-Start----*@
+
+    <header class="header">
+        <a class="logo" style="text-decoration:none;  color:var(--peru);" href="~/Home/Index"><img src="~/Content/img/logo.png"/>Gallery Cafe</a>
+        <nav class="navbar">
+            <a style="text-decoration:none;" href="~/Home/Index">Home</a>
+            <a style="text-decoration:none;" href="~/Home/About">About</a>
+            <a style="text-decoration:none;" href="~/Home/Gallery">Gallery</a>
+            <a style="text-decoration:none;" href="~/Menu/Menu">Menu</a>
+            <a style="text-decoration:none;" href="~/Reservation/Booking">Reservation</a>
+           
+
+        </nav>
+        <div class="header-icon" id="header-icon">
+            <i class="fas fa-search" id="search-icon"></i>
+            <a class="fa-solid fa-cart-shopping" href="~/Customer/CustomerHome" id="cart-icon" style="text-decoration:none;"><span id="cart-count"></span></a>
+            <div class="user-dropdown">
+                <a id="user-icon" style="text-decoration:none;" class="fas fa-solid fa-user" href="#" onclick="toggleDropdown(event)"></a>
+                <ul class="dropdown-menu" id="user-dropdown-menu" style="display: none;">
+                    <li><a class="dropdown-item" href="/Account/AdminLogin">Staff</a></li>
+                    <li><a class="dropdown-item" href="/Account/Login">Customer</a></li>
+                </ul>
+            </div>
+            <i class="fas fa-bars" id="hamberger"></i>
+        </div>
+    </header>
+    @*---Header-End----*@
+
+    @RenderBody()
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- About Us Column -->
+                <div class="col-lg-3 col-md-6 footer-col footer-about">
+                    <h3>About Us</h3>
+                    <p>The Gallery Cafe offers a unique blend of art and cuisine. Experience the best food and culture in an unforgettable atmosphere.</p>
+                </div>
+
+                <!-- Social Media Column -->
+                <div class="col-lg-3 col-md-6 footer-col footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+
+                    </div>
+                </div>
+
+                <!-- Payment Methods Column -->
+                <div class="col-lg-3 col-md-6 footer-col footer-payment">
+                    <h3>Payment Methods</h3>
+                    <div class="payment-icons">
+                        <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                        <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                        <img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal">
+                        <img src="https://img.icons8.com/color/48/000000/apple-pay.png" alt="Apple Pay">
+                    </div>
+                </div>
+
+                <!-- Contact Info Column -->
+                <div class="col-lg-3 col-md-6 footer-col footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><strong>Address:</strong> 456 Gallery Rd, Colombo, Sri Lanka</p>
+                    <p><strong>Phone:</strong> +94 77 123 4567</p>
+                    <p><strong>Email:</strong> info@thegallerycafe.com</p>
+                    <h4>Operating Hours</h4>
+                    <p>Mon - Fri: 8 AM - 10 PM</p>
+                    <p>Sat - Sun: 9 AM - 11 PM</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center footer-map">
+                    <h3>Find Us</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509375!2d144.95373531565426!3d-37.8162793797517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0x5045675218ce6e0!2sMelbourne!5e0!3m2!1sen!2sau!4v1616825979462!5m2!1sen!2sau"
+                            width="100%" height="200" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="copyright">© 2024 The Gallery Cafe. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
     @RenderSection("scripts", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="~/Scripts/site.js"></script>
+    @*</-----------------------------USER-LOGIN------------------------->*@
+    <script>
+    $(document).ready(function () {
+
+        $.get('/Account/GetCurrentUser', function (response) {
+            if (response.success) {
+                // Show the username on the topbar
+                $('#username').html('Welcome, ' + response.data.username);
+
+                // Change user icon to a logout link
+                $('#user-icon').removeClass('fa-user').addClass('fa-right-from-bracket').attr('href', '#').click(function () {
+                    logout();
+                });
+
+                // Fetch the order count and display it in the cart icon
+                $.get('/Order/GetOrderCount', function (orderResponse) {
+                    if (orderResponse.success) {
+                        $('#cart-count').text(orderResponse.orderCount);
+                    } else {
+                        $('#cart-count').text('0'); // Default to 0 if no orders or user not logged in
+                    }
+                });
+            } else {
+                // If user is not logged in, set the cart count to 0
+                $('#cart-count').text('0');
+            }
+        });
+
+        // Logout function
+        function logout() {
+            $.post('/Account/Logout', function (response) {
+                if (response.success) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+    </script>
+    @*</-----------------------------USER-LOGIN------------------------->*@
+
+    @*<----Dropdown Manage--------->*@
+    <script>
+    function toggleDropdown(event) {
+        event.preventDefault();
+        const dropdownMenu = document.getElementById("user-dropdown-menu");
+  
+        dropdownMenu.style.display = dropdownMenu.style.display === "none" ? "block" : "none";
+    }
+
+
+    window.onclick = function(event) {
+        const dropdownMenu = document.getElementById("user-dropdown-menu");
+        if (!event.target.matches('#user-icon') && !event.target.matches('.dropdown-item')) {
+            dropdownMenu.style.display = "none";
+        }
+    }
+    </script>
+    @*<----Dropdown Manage--------->*@
 </body>
 </html>

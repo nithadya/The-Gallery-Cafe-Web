@@ -1,31 +1,996 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
+}
+@section Styles {
+   <link href="~/Content/home.css" rel="stylesheet" type="text/css" />
+}
+<style>
+
+.table-icon {
+        width: 150px; /* Adjusted for small size */
+        height: 150px; /* Adjusted for small size */
+        margin: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #fff;
+        transition: background-color 0.3s ease; /* Smooth transition */
+    }
+
+    .available {
+        background-color: #28a745; /* Green for available */
+    }
+
+    .booked {
+        background-color: #dc3545; /* Red for booked */
+    }
+
+    .table-icon:hover {
+        opacity: 0.8;
+    }
+
+    .reservation-slider .swiper-container {
+        margin: 20px 0;
+    }
+
+      #map {
+            height: 400px;
+            width: 100%;
+        }
+
+
+   .menu-card {
+        background: var(--card-bg-gradient);
+        border-radius: var(--border-radius);
+        padding: 10px;
+        margin: 10px;
+        width: calc(33% - 20px);
+        box-shadow: var(--box-shadow);
+        text-align: center;
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+    .menu-card img {
+        width: 100%;
+        height: auto;
+        border-radius: var(--border-radius);
+    }
+
+    .menu-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .pre-order-btn {
+        background-color: var(--secondary-color);
+        color: var(--white);
+        padding: 8px 12px;
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: background-color var(--transition-speed), transform var(--transition-speed);
+    }
+
+    .pre-order-btn:hover {
+        background-color: var(--button-hover-color);
+        transform: scale(1.05);
+    }
+
+   @@media (max-width: 768px) {
+        .menu-card {
+            width: calc(50% - 20px);
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .menu-card {
+            width: 100%;
+        }
+    }
+
+    .menu-items-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    #search-box {
+        padding: 10px;
+        width: 90%;
+        border: 1px solid #ccc;
+        border-radius: var(--border-radius);
+    }
+
+    #search-results {
+        margin-top: 20px;
+    }
+
+
+ /* About Section */
+        .Home-about {
+            display: flex;
+            align-items: center;
+            justify-content:space-around;
+            padding: 50px;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--box-shadow);
+        }
+
+        .Home-about-content {
+            max-width: 600px;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-right: 20px;
+        }
+
+        .Home-about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--black);
+        }
+
+        .Home-about-content p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: var(--light-black);
+        }
+
+        .Home-read-more {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: background-color var(--transition-1), transform var(--transition-1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .Home-read-more::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: var(--button-hover-color);
+            transition: transform var(--transition-1);
+            transform: scale(0);
+            z-index: 0;
+        }
+
+        .Home-read-more:hover {
+            transform: translateY(-3px);
+        }
+
+        .Home-read-more:hover::after {
+            transform: scale(1);
+        }
+
+        .Home-about-img {
+            width: 400px;  /* Fixed width for circle */
+            height: 400px; /* Fixed height for circle */
+            overflow: hidden; /* Prevent overflow */
+            border-radius: var(--radius-circle); /* Make the image circular */
+            animation: rotate 10s linear infinite;
+            margin-left: 20px; /* Add margin to separate from content */
+        }
+
+        .Home-about-img img {
+            width: 100%; /* Make the image responsive */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: cover; /* Cover the container */
+        }
+
+        @@keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .Home-about-icon-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .Home-icon {
+            margin: 0 20px;
+            text-align: center;
+            transition: transform var(--transition-2);
+        }
+
+        .Home-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .Home-icon-image {
+            font-size: 50px; /* Adjust the icon size as needed */
+            color: var(--peru); /* Icon color, change as necessary */
+        }
+
+        .Home-icon p {
+            margin-top: 5px;
+            color: var(--black);
+        }
+
+        /* Responsive Styles */
+        @@media (max-width: 768px) {
+            .Home-about {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .Home-about-content {
+                margin-right: 0;
+                margin-bottom: 20px; /* Add margin below content on mobile */
+            }
+
+            .Home-about-img {
+                width: 300px;  /* Smaller fixed width for mobile */
+                height: 300px; /* Smaller fixed height for mobile */
+            }
+
+            .Home-about-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .Home-about-content p {
+                font-size: 0.9rem;
+            }
+
+            .Home-icon {
+                margin: 0 10px;
+            }
+
+            .Home-icon-image {
+                font-size: 40px;
+            }
+        }
+/*<about>*/
+
+
+.reservation-booking-container {
+    width: 90%;
+    background-color: var(--white);
+    border-radius: var(--radius-24);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition-2);
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+.table-icon {
+    font-size:15px;
+    margin: 10px;
+    padding: 20px;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+    color: var(--white);
+    font-weight: bold;
+    background-color: var(--secondary-color);
+    transition: var(--transition-1);
+}
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
+.booked {
+    background-color: var(--black) !important;
+    
+}
+
+.available {
+    background-color: var(--peru) !important;
+}
+
+.selected {
+    background-color: var(--button-hover-color) !important;
+}
+
+.table-icon:hover {
+    box-shadow: var(--box-shadow);
+    transform: scale(1.1);
+}
+
+    .heading {
+        margin-bottom: 20px;
+    }  
+
+@@media screen and (max-width: 768px) {
+    .table-icon {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@@media screen and (max-width: 480px) {
+    .table-icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+
+/*<--------promotion------->*/
+.promotion-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 5% 5%;
+    gap: 20px;
+}
+
+.promotion-image-container {
+    flex: 1;
+    position: relative;
+    max-width: 40%;
+}
+
+.promotion-image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: transform 0.5s ease;
+}
+
+.promotion-details {
+    flex: 2;
+    padding-left: 20px;
+}
+
+.promotion-heading {
+    font-size: 2.5rem;
+    color: var(--peru);
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease forwards;
+}
+
+.promotion-sub-heading {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--light-black);
+}
+
+.swiper-container-promotion {
+    width: 100%;
+}
+
+.swiper-slide-promotion {
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.promotion-title {
+    font-size: 2rem;
+    color: var(--peru);
+    margin-bottom: 10px;
+}
+
+/* Swiper navigation arrows */
+.swiper-button-next-promotion, .swiper-button-prev-promotion {
+    color: var(--peru);
+}
+
+/* Responsive Styles */
+@@media (max-width: 768px) {
+    .promotion-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .promotion-image-container {
+        max-width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .promotion-details {
+        padding-left: 0;
+    }
+
+    .promotion-heading {
+        font-size: 2rem;
+    }
+
+    .promotion-title {
+        font-size: 1.5rem;
+    }
+}
+
+/*<--------promotion------->*/
+</style>
+
+
+
+@*------preloader-------*@
+<div class="preload" data-preaload>
+    <div class="circle"></div>
+    <p class="text">Gallery-Cafe</p>
+</div>
+@*------preloader-------*@
+
+
+@*---Search Bar-Start----*@
+<div class="search-section">
+    <form action="" id="search-form">
+        <input type="search" name="" id="search-box" placeholder="Search Food..." />
+        <label for="search-box" class="fas fa-search"></label>
+        <i class="fas fa-times" id="search-close"></i>
+    </form>
+    <div id="search-results" class="menu-items-container"></div>
+</div>
+@*---Search Bar-End----*@
+
+
+<section class="home" id="home">
+    <div class="swiper home-slider">
+        <div class="swiper-wrapper wrap">
+            <div class="swiper-slide slide" style="background-image:url(../../Content/img/home1.jpg); background-repeat:no-repeat;">
+                <div class="home-content">
+                    <span>Outstanding Food</span>
+                    <h2>Sri Lankan</h2>
+                    <p>Experience the vibrant tastes of Sri Lanka with our traditional dishes, made from the freshest ingredients.</p>
+                    <a>order Now</a>
+                </div>
+                <div class="home-img"><img class="img-fluid" src="~/Content/img/2009.png" alt=""></div>
+            </div>
+            <div class="swiper-slide slide" style="background-image:url(../../Content/img/home2.jpg); background-repeat:no-repeat;">
+                <div class="home-content">
+                    <span>Outstanding Food</span>
+                    <h2>Indian</h2>
+                    <p>Indulge in our rich and aromatic Indian dishes, crafted with a blend of spices and herbs for an unforgettable meal.</p>
+                    <a>order Now</a>
+                </div>
+                <div class="home-img"><img class="img-fluid" src="~/Content/img/2006.png" alt=""></div>
+            </div>
+            <div class="swiper-slide slide" style="background-image:url(../../Content/img/home3.jpg); background-repeat:no-repeat;">
+                <div class="home-content">
+                    <span>Outstanding Food</span>
+                    <h2>Italian</h2>
+                    <p>how to make complete responsive food / restaurant website design using html css and vanilla javascript.</p>
+                    <a>order Now</a>
+                </div>
+                <div class="home-img"><img class="img-fluid" src="~/Content/img/1003.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="Home-about" id="about">
+    <div class="Home-about-img">
+        <img src="~/Content/img/logo.png" alt="about-background" />
+    </div>
+    <div class="Home-about-content">
+        <h3 class="heading">Welcome to Gallery Cafe</h3>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            Experience delightful beverages and dining at Gallery Cafe, where we create culinary masterpieces using fresh ingredients.
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <a href="~/Home/About" class="Home-read-more">Read more</a>
+        <div class="Home-about-icon-container">
+            <div class="Home-icon">
+                <i class="fas fa-coffee Home-icon-image"></i>
+                <p>Beverages</p>
+            </div>
+            <div class="Home-icon">
+                <i class="fas fa-utensils Home-icon-image"></i>
+                <p>Dining</p>
+            </div>
+            <div class="Home-icon">
+                <i class="fas fa-concierge-bell Home-icon-image"></i>
+                <p>Food</p>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+</section>
+
+
+
+<section class="section__container banner__container" id="special">
+    <div class="banner__card">
+        <p>TRY IT OUT TODAY</p>
+        <h4>MOST POPULAR BURGER</h4>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="banner__card">
+        <p>TRY IT OUT TODAY</p>
+        <h4>MORE FUN<br />MORE TASTE</h4>
+    </div>
+    <div class="banner__card">
+        <p>TRY IT OUT TODAY</p>
+        <h4>FRESH & CHILI</h4>
+    </div>
+</section>
+
+
+
+<section class="booking" style="width:100%; height:100vh;display:flex; justify-content:center; align-items:center; background:url(../../Content/img/gallery-cafe.jpg); background-attachment:fixed; background-position:center;background-repeat:no-repeat;background-size:contain;">
+    <div class="reservation-booking-container">
+        <h1 class="heading">Book Your Table</h1>
+        <div id="tableList" class="d-flex flex-wrap justify-content-center">
+            <!-- Tables will be populated dynamically -->
+        </div>
+        <div class="text-center mt-4">
+            <button id="bookTableBtn" class="btn btn-primary" style="display:none;background-color:var(--peru); border-radius: var(--border-radius); transition: var(--transition-2);">Book Selected Table</button>
+        </div>
+        <!-- Reservation Form Modal -->
+        <div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="border-radius: var(--radius-24); box-shadow: var(--box-shadow);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reservationModalLabel" style="color:var(--peru);">Reservation Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="reservationForm">
+                            <input type="hidden" id="selectedTableNumber" name="tableNumber">
+                            <div class="form-group">
+                                <label for="reservationDate">Date</label>
+                                <input type="date" class="form-control" id="reservationDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guests">Number of Guests</label>
+                                <input type="number" class="form-control" id="guests" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="parking">Parking Required?</label>
+                                <select class="form-control" id="parking">
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="submitReservation" class="btn btn-primary" style="background-color:var(--peru);">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<section>
+<div class="container parking my-4">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-4">Welcome to Our Restaurant</h2>
+            <p>We offer the best food and the best service in town.</p>
+            <p>Our restaurant is equipped with parking for your convenience.</p>
+            <h4>Parking Availability</h4>
+            <p id="parking-status" class="text-success">Checking availability...</p>
+
+            <!-- Button to refresh parking status -->
+            <button id="refresh-parking" class="btn btn-primary">
+                <i class="fas fa-sync-alt"></i> Refresh Parking Availability
+            </button>
+        </div>
+        <div class="col-md-6">
+            <!-- Leaflet.js Map -->
+            <div id="map"></div>
+        </div>
     </div>
 </div>
+</section>
+
+
+
+<section class="review" id="review">
+    <h3 class="sub-heading">Customer's Reviews</h3>
+    <h2 class="heading"><span>What</span> They Say</h2>
+
+    <div class="swiper-container review-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="~/Content/img/layouts/01.png" alt="user" />
+                    <div class="review-user-info">
+                        <h3 class="sub-heading">Alice Smith</h3>
+                    </div>
+                </div>
+                <p>The ambiance of the Gallery Café is simply amazing! I love how cozy and inviting it feels.</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="~/Content/layouts/02.png" alt="user" />
+                    <div class="review-user-info">
+                        <h3 class="sub-heading">Bob Johnson</h3>
+                    </div>
+                </div>
+                <p>Great place to unwind with a cup of coffee and a piece of cake. Highly recommend!</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="~/Content/img/layouts/03.png" alt="user" />
+                    <div class="review-user-info">
+                        <h3 class="sub-heading">Emma Brown</h3>
+                    </div>
+                </div>
+                <p>The art displays add such a unique touch to the café experience. A must-visit!</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="~/Content/img/layouts/02.png" alt="user" />
+                    <div class="review-user-info">
+                        <h3 class="sub-heading">Liam Davis</h3>
+                    </div>
+                </div>
+                <p>I love the variety of snacks and drinks available. Perfect for a casual meetup.</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="~/Content/img/layouts/04.png" alt="user" />
+                    <div class="review-user-info">
+                        <h3 class="sub-heading">Sophia Wilson</h3>
+                    </div>
+                </div>
+                <p>The Gallery Café has the best coffee in town! I always look forward to coming here.</p>
+            </div>
+
+            <div class="swiper-slide slide">
+                <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="~/Content/img/layouts/01.png" alt="user" />
+                    <div class="review-user-info">
+                        <h3 class="sub-heading">Noah Martinez</h3>
+                    </div>
+                </div>
+                <p>The service is fantastic! The staff are always friendly and attentive.</p>
+            </div>
+            <!-- Repeat for more slides if necessary -->
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!-- Include SweetAlert2 for better popups -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Leaflet.js Script for the Map -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<!-- Leaflet.js Script for the Map -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+@*--------Review-------*@
+<script>
+    var swiper = new Swiper(".review-slider", {
+        grabCursor: true,
+        loop: true,
+        centeredSlides: true,
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction:false,
+        },
+        effect: "coverflow",  
+        coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+        },
+        breakpoints: {
+            0: {
+                slidesPerView: 1,
+            },
+            640: {
+                slidesPerView: 2,
+            },
+            768: {
+                slidesPerView: 3,
+            },
+            1024: {
+                slidesPerView: 4,
+            },
+        },
+    });
+</script>
+@*--------Review-------*@
+
+
+@*//---------Menu search-------*@
+<<script>
+    $(document).ready(function () {
+        // Search functionality
+        $('#search-box').on('input', function () {
+            var query = $(this).val().trim();
+            if (query.length > 0) {
+                searchFood(query);
+            } else {
+                $('#search-results').empty();
+            }
+        });
+
+        // Function to handle the search
+        function searchFood(query) {
+            $.ajax({
+                url: '/Menu/SearchFood',
+                type: 'GET',
+                data: { query: query },
+                success: function (response) {
+                    if (response.success) {
+                        displaySearchResults(response.data);
+                    } else {
+                        $('#search-results').html('<p>No results found.</p>');
+                    }
+                },
+                error: function () {
+                    $('#search-results').html('<p>An error occurred while fetching results.</p>');
+                }
+            });
+        }
+
+        // Display search results
+        function displaySearchResults(foodItems) {
+            var resultsContainer = $('#search-results');
+            resultsContainer.empty();
+            foodItems.forEach(function (item) {
+                var card = `<div class="menu-card"><img src="${item.ImagePath}" alt="${item.Name}"> <h4>${item.Name}</h4><p>${item.Description}</p><p>Price: $${item.Price.toFixed(2)}</p><button class="pre-order-btn" onclick="openPreOrder(${item.MenuItemId}, '${item.Name}')">Pre-order</button></div>`;
+                resultsContainer.append(card);
+            });
+        }
+
+        // Function to handle adding an order
+        function addToOrder(menuItemId) {
+            $.get('/Account/GetCurrentUser', function (response) {
+                if (response.success) {
+                    // If the user is logged in, show the quantity prompt
+                    Swal.fire({
+                        title: 'Enter Quantity',
+                        input: 'number',
+                        inputLabel: 'Quantity',
+                        inputPlaceholder: 'Enter the quantity',
+                        showCancelButton: true,
+                        confirmButtonText: 'Pre-order',
+                        cancelButtonText: 'Cancel',
+                        inputValidator: (value) => {
+                            if (!value || value <= 0) {
+                                return 'Please enter a valid quantity!';
+                            }
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const quantity = result.value;
+                            placeOrder(menuItemId, quantity);
+                        }
+                    });
+                } else {
+                    // If the user is not logged in, show a login prompt
+                    Swal.fire({
+                        title: 'Please log in',
+                        text: 'You must log in to place an order.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Log in',
+                        cancelButtonText: 'Cancel',
+                        preConfirm: () => {
+                            window.location.href = '/Account/Login';
+                        }
+                    });
+                }
+            });
+        }
+
+        // Function to place the order via AJAX
+        function placeOrder(menuItemId, quantity) {
+            $.ajax({
+                url: '/Order/PreOrder',
+                type: 'POST',
+                data: { menuItemId: menuItemId, quantity: quantity },
+                success: function (response) {
+                    if (response.success) {
+                        updateCartCount(response.orderCount);
+                        Swal.fire({
+                            title: 'Order Successful!',
+                            text: response.message,
+                            icon: 'success',
+                            showCancelButton: true,
+                            confirmButtonText: 'Preview Your Orders',
+                            cancelButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '/Customer/CustomerOrders'; // Redirect to order management page
+                            }
+                        });
+                    } else {
+                        showAlert('Error', response.message, 'error');
+                    }
+                },
+                error: function () {
+                    showAlert('Error', 'Failed to place the order.', 'error');
+                }
+            });
+        }
+
+        // Update cart count
+        function updateCartCount(count) {
+            $('#cart-count').text(count);
+        }
+    });
+</script>
+ @*//---------Menu search-------*@
+
+
+<!-- Leaflet.js Script for the Map -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    $(document).ready(function () {
+        // Initialize the map using Leaflet.js
+        var map = L.map('map').setView([40.7128, -74.0060], 13); // Coordinates for New York, change to your restaurant location
+
+        // Add OpenStreetMap tiles to the map
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a marker for the restaurant location
+        var restaurantMarker = L.marker([40.7128, -74.0060]).addTo(map)
+            .bindPopup('Our Restaurant')
+            .openPopup();
+
+        // Function to update parking availability dynamically
+        function updateParkingAvailability() {
+            $.ajax({
+                url: '/Home/GetParkingAvailability', // Action method to get parking availability
+                method: 'GET',
+                success: function (data) {
+                    $('#parking-status').text(data.message);
+                    $('#parking-status').removeClass().addClass(data.isAvailable ? 'text-success' : 'text-danger');
+                },
+                error: function () {
+                    $('#parking-status').text('Unable to fetch parking availability.');
+                    $('#parking-status').removeClass().addClass('text-danger');
+                }
+            });
+        }
+
+        // Refresh parking status when the button is clicked
+        $('#refresh-parking').click(function () {
+            updateParkingAvailability();
+        });
+
+        // Fetch parking availability on page load
+        updateParkingAvailability();
+    });
+</script>
+
+@*<-----------------------------RESERVATION------------------------->*@
+<script>
+$(document).ready(function () {
+    // Fetch available and booked tables
+    $.ajax({
+        url: '/Reservation/GetAvailableTables',
+        type: 'GET',
+        success: function (response) {
+            const tables = response.tables;
+            const bookedTables = response.bookedTables;
+
+            tables.forEach(function (tableNumber) {
+                let tableClass = bookedTables.includes(tableNumber) ? 'booked' : 'available';
+                $('#tableList').append(`<div class="table-icon ${tableClass}" data-table="${tableNumber}"><i class="fas fa-chair"></i><br>${tableNumber}</div>`);
+            });
+
+            // Handle table selection
+            $('.available').click(function () {
+                $('.available').removeClass('selected');
+                $(this).addClass('selected');
+                const tableNumber = $(this).data('table');
+                $('#selectedTableNumber').val(tableNumber);
+                $('#bookTableBtn').show();
+            });
+
+            // Handle booked table click
+            $('.booked').click(function () {
+                Swal.fire('Sorry', 'This table is already booked.', 'info');
+            });
+
+            // Book Selected Table Button click
+            $('#bookTableBtn').click(function () {
+                $('#reservationModal').modal('show');
+            });
+        },
+        error: function () {
+            Swal.fire('Error', 'Failed to load table data.', 'error');
+        }
+    });
+
+    // Submit reservation form
+    $('#submitReservation').click(function () {
+        const tableNumber = $('#selectedTableNumber').val();
+        const reservationDate = $('#reservationDate').val();
+        const numberOfGuests = $('#guests').val();
+        const parkingRequired = $('#parking').val();
+
+        if (!reservationDate || !numberOfGuests) {
+            Swal.fire('Warning', 'Please fill in all fields', 'warning');
+            return;
+        }
+
+        // Create reservation
+        $.ajax({
+            url: '/Reservation/CreateReservation',
+            type: 'POST',
+            data: {
+                TableNumber: tableNumber,
+                ReservationDate: reservationDate,
+                NumberOfGuests: numberOfGuests,
+                ParkingRequired: parkingRequired
+            },
+            success: function (response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonText: 'View Reservations'
+                    }).then(() => {
+                        window.location.href = '/Customer/CustomerReservation'; // Redirect to customer reservation view
+                    });
+                } else {
+                    Swal.fire('Error', response.message, 'error');
+                }
+            },
+            error: function () {
+                Swal.fire('Error', 'Failed to make reservation.', 'error');
+            }
+        });
+    });
+});
+</script>
+@*</-----------------------------RESERVATION------------------------->*@
+
+
+
+
+
+
+
+
+
+
+
+

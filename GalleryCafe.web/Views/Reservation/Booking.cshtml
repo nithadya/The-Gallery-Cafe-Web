@@ -1,0 +1,163 @@
+﻿
+@section Styles {
+    <link href="~/Content/home.css" rel="stylesheet" type="text/css" />
+}
+    <style>
+        section{
+            padding:0;
+        }
+        .table-icon {
+            margin: 10px;
+            padding: 20px;
+            width: 100px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .booked {
+            background-color: red;
+        }
+
+        .available {
+            background-color: green;
+        }
+
+        .selected {
+            background-color: #fc7f09;
+        }
+    </style>
+
+
+    <section class="booking" style="width:100%; height:100vh;display:flex; justify-content:center; align-items:center; background:url(../../Content/img/web-bk.png)">
+    <div class="reservation-booking-container" >
+        <h1 class="heading">Book Your Table</h1>
+        <div id="tableList" class="d-flex flex-wrap justify-content-center">
+            <!-- Tables will be populated dynamically -->
+        </div>
+        <div class="text-center mt-4">
+            <button id="bookTableBtn" class="btn btn-primary" style="display:none;">Book Selected Table</button>
+        </div>
+
+        <!-- Reservation Form Modal -->
+        <div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reservationModalLabel" style="color:#fc7f09;">Reservation Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="reservationForm">
+                            <input type="hidden" id="selectedTableNumber" name="tableNumber">
+                            <div class="form-group">
+                                <label for="reservationDate">Date</label>
+                                <input type="date" class="form-control" id="reservationDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guests">Number of Guests</label>
+                                <input type="number" class="form-control" id="guests" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="parking">Parking Required?</label>
+                                <select class="form-control" id="parking">
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="submitReservation" class="btn btn-primary" style="background-color:#fc7f09;">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    <!-- Include SweetAlert2 for alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+    $(document).ready(function () {
+        // Fetch available and booked tables
+        $.ajax({
+            url: '/Reservation/GetAvailableTables',
+            type: 'GET',
+            success: function (response) {
+                const tables = response.tables;
+                const bookedTables = response.bookedTables;
+
+                tables.forEach(function (tableNumber) {
+                    let tableClass = bookedTables.includes(tableNumber) ? 'booked' : 'available';
+                    $('#tableList').append(`<div class="table-icon ${tableClass} text-center" data-table="${tableNumber}"><i class="fas fa-chair"></i><br>${tableNumber}</div>`);
+                });
+
+                // Handle table selection
+                $('.available').click(function () {
+                    $('.available').removeClass('selected');
+                    $(this).addClass('selected');
+                    const tableNumber = $(this).data('table');
+                    $('#selectedTableNumber').val(tableNumber);
+                    $('#bookTableBtn').show();
+                });
+
+                // Book Selected Table Button click
+                $('#bookTableBtn').click(function () {
+                    $('#reservationModal').modal('show');
+                });
+            },
+            error: function () {
+                Swal.fire('Error', 'Failed to load table data.', 'error');
+            }
+        });
+
+        // Submit reservation form
+        $('#submitReservation').click(function () {
+            const tableNumber = $('#selectedTableNumber').val();
+            const reservationDate = $('#reservationDate').val();
+            const numberOfGuests = $('#guests').val();
+            const parkingRequired = $('#parking').val();
+
+            if (!reservationDate || !numberOfGuests) {
+                Swal.fire('Warning', 'Please fill in all fields', 'warning');
+                return;
+            }
+
+            // Create reservation
+            $.ajax({
+                url: '/Reservation/CreateReservation',
+                type: 'POST',
+                data: {
+                    TableNumber: tableNumber,
+                    ReservationDate: reservationDate,
+                    NumberOfGuests: numberOfGuests,
+                    ParkingRequired: parkingRequired
+                },
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: response.message,
+                            icon: 'success',
+                            confirmButtonText: 'View Reservations'
+                        }).then(() => {
+                            window.location.href = '/Customer/CustomerReservation'; //VIEW CUSTOMER RESERVATION
+                        });
+                    } else {
+                        Swal.fire('Error', response.message, 'error');
+                    }
+                },
+                error: function () {
+                    Swal.fire('Error', 'Failed to make reservation.', 'error');
+                }
+            });
+        });
+    });
+    </script>
+
+

@@ -1,0 +1,301 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <!-- DataTables Bootstrap 4 CSS -->
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="~/Content/Customer.css" rel="stylesheet" />
+    <link href="~/Content/Dashbord.css" rel="stylesheet" />
+    <script src="~/Scripts/customer.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            padding: 0;
+        }
+
+        html {
+            font-size: 13px;
+        }
+
+        /*.navbar{
+            background-color:#ea6a12 !important;
+        }
+
+        .sb-sidenav-dark{
+             background-color:#ffffff !important;
+             color:#ea6a12;
+        }*/
+
+        .update-in {
+            border: hidden;
+            outline: none;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+<body class="sb-nav-fixed">
+
+
+    <nav class="sb-topnav navbar navbar-expand navbar-dark  bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="~/Home/Index">The Gallery Cafe</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn searchbtn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+
+
+
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="~/Customer/Home">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminProfile">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Profile
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminOrder">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Orders
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminReservation">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Reservation
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Operations</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Menu
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="~/Admin/AdminCreateMenu">Add Food Item</a>
+                                <a class="nav-link" href="~/Admin/AdminMenu">Manage Menu</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Orders
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Users
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="~/Account/RegisterAdmin">User Add</a>
+                                        <a class="nav-link" href="~/Admin/AdminUsers">User Manage</a>
+                                    </nav>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="sb-sidenav-menu-heading">Addons</div>
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Charts
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    <span>Admin</span>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <div class="container mt-5">
+                <h1 class="text-center">User Management</h1>
+                <table id="usersTable" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>UserId</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <!-- Edit User Modal -->
+            <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit User</h5>
+                            <div class="text-muted">Copyright &copy; The Gallery Cafe Developed by Mihisara 2024</div>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editUserForm">
+                                <input type="hidden" id="editUserId">
+                                <div class="form-group">
+                                    <label for="update-lb editFirstName">First Name</label>
+                                    <input type="text" class="update-in form-control" id="editFirstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editLastName">Last Name</label>
+                                    <input type="text" class="update-in form-control" id="editLastName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editEmail">Email</label>
+                                    <input type="email" class="update-in form-control" id="editEmail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editRole">Role</label>
+                                    <input type="text" class="update-in form-control" id="editRole" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!------Footer------>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap 4 JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('#usersTable').DataTable({
+                scrollX: true,
+                ajax: {
+                    url: '/UserManage/GetUsers',
+                    type: 'GET',
+                    datatype: 'json'
+                },
+                columns: [
+                    { data: 'UserId' },
+                    { data: 'FirstName' },
+                    { data: 'LastName' },
+                    { data: 'Email' },
+                    { data: 'Role' },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            return `<button class='btn btn-primary btn-sm' onclick='editUser(${row.UserId})'>Edit</button> <button class='btn btn-danger btn-sm' onclick='deleteUser(${row.UserId})'>Delete</button>`;
+                        }
+                    }
+                ]
+            });
+
+            // Delete user
+            window.deleteUser = function (userId) {
+                if (confirm("Are you sure you want to delete this user?")) {
+                    $.post('/UserManage/DeleteUser', { userId: userId }, function (result) {
+                        if (result.success) {
+                            alert(result.message);
+                            table.ajax.reload(); // Refresh the table
+                        } else {
+                            alert(result.message);
+                        }
+                    });
+                }
+            };
+
+            // Edit user
+            window.editUser = function (userId) {
+                $.get(`/UserManage/GetUsers?userId=${userId}`, function (data) {
+                    var user = data.data[0]; // Assuming the response is an array
+                    $('#editUserId').val(user.UserId);
+                    $('#editFirstName').val(user.FirstName);
+                    $('#editLastName').val(user.LastName);
+                    $('#editEmail').val(user.Email);
+                    $('#editRole').val(user.Role);
+                    $('#editUserModal').modal('show');
+                });
+            };
+
+            // Submit Edit User form
+            $('#editUserForm').on('submit', function (e) {
+                e.preventDefault();
+                var userId = $('#editUserId').val();
+                var firstName = $('#editFirstName').val();
+                var lastName = $('#editLastName').val();
+                var email = $('#editEmail').val();
+                var role = $('#editRole').val();
+
+                $.post('/UserManage/EditUser', { userId: userId, firstName: firstName, lastName: lastName, email: email, role: role }, function (result) {
+                    if (result.success) {
+                        alert(result.message);
+                        $('#editUserModal').modal('hide');
+                        table.ajax.reload(); // Refresh the table
+                    } else {
+                        alert(result.message);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+</html>

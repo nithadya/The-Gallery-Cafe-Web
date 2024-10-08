@@ -1,0 +1,402 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - Customer</title>
+
+    <!-- jQuery (necessary for DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap CSS (Bootstrap 5) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- DataTables CSS for table styling -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <link href="~/Content/Dashbord.css" rel="stylesheet" />
+    <style>        :root {
+            --peru: #fc7f09;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h2 {
+            color: var(--peru);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .table-container {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+            border: none;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table thead {
+            background-color: var(--peru);
+            color: white;
+            border: none;
+        }
+
+        table thead th {
+            border: none;
+            padding: 12px;
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid #eaeaea;
+            transition: background-color 0.2s ease;
+        }
+
+        table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .btn {
+            margin-right: 5px;
+            border: none;
+        }
+
+        .btn-approve {
+            background-color: #28a745;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .btn-approve:hover {
+            background-color: #218838;
+        }
+
+        .btn-cancel {
+            background-color: #dc3545;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .btn-cancel:hover {
+            background-color: #c82333;
+        }
+
+        /* Media Queries for Mobile Views */
+        @@media (max-width: 980px) {
+            .table-container {
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+
+        @@media (max-width: 778px) {
+            table thead {
+                display: none;
+            }
+
+            table tbody tr {
+                display: block;
+                margin-bottom: 10px;
+                border-bottom: none;
+                background: #fff;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+                padding: 10px;
+                border-radius: 8px;
+            }
+
+            table tbody td {
+                display: block;
+                text-align: right;
+                padding: 10px 15px;
+                border: none;
+                position: relative;
+            }
+
+            table tbody td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                font-weight: bold;
+                color: var(--peru);
+            }
+
+            .btn {
+                width: 50%;
+                margin-bottom: 10px;
+            }
+        }</style>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="~/Home/Index">The Gallery Cafe</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="~/Customer/Home">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminProfile">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Profile
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminOrder">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Orders
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminReservation">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Reservation
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Operations</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Menu
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="~/Admin/AdminCreateMenu">Add Food Item</a>
+                                <a class="nav-link" href="~/Admin/AdminMenu">Manage Menu</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Orders
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Users
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="~/Account/RegisterAdmin">User Add</a>
+                                        <a class="nav-link" href="~/Admin/AdminUsers">User Manage</a>
+                                    </nav>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="sb-sidenav-menu-heading">Addons</div>
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Charts
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    <span>Admin</span>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+
+            <div class="container mt-5">
+                <div class="table-container">
+                    <h2>My Reservations</h2>
+
+                    <!-- Reservation Table -->
+                    <table id="reservationTable" class="table table-hover display nowrap">
+                        <thead>
+                            <tr>
+                                <th>Table Number</th>
+                                <th>Reservation Date</th>
+                                <th>Guests</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be inserted here via AJAX -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; The Gallery Cafe Developed by Mihisara 2024</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Bootstrap JS Bundle (Bootstrap 5) with Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS for table functionality -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables Responsive JS for responsive tables -->
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <!-- Chart.js for charts and data visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/customer.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTables with AJAX data source
+            $('#reservationTable').DataTable({
+                responsive: true,
+                ajax: '/Reservation/GetAllReservations',
+                columns: [
+                    { data: 'TableNumber', title: 'Table Number', render: function (data, type, row) { return `<i class="fas fa-chair"></i> ${data}`; } },
+                    { data: 'ReservationDate', title: 'Reservation Date', render: function (data, type, row) { return `<i class="fas fa-calendar-alt"></i> ${data}`; } },
+                    { data: 'NumberOfGuests', title: 'Guests', render: function (data, type, row) { return `<i class="fas fa-users"></i> ${data}`; } },
+                    { data: 'Status', title: 'Status', render: function (data, type, row) { return data === 'Confirmed' ? `<span class="badge bg-success">${data}</span>` : `<span class="badge bg-warning">${data}</span>`; } },
+                    {
+                        data: null,
+                        title: 'Actions',
+                        render: function (data, type, row) {
+                            return `<button class="btn btn-approve approveReservationBtn" data-id="${row.ReservationId}"><i class="fas fa-check-circle"></i> Approve</button><button class="btn btn-cancel cancelReservationBtn" data-id="${row.ReservationId}"><i class="fas fa-times-circle"></i> Cancel</button>`;
+                        }
+                    }
+                ]
+            });
+
+            // Approve reservation logic
+            $('#reservationTable').on('click', '.approveReservationBtn', function () {
+                const reservationId = $(this).data('id');
+                $.ajax({
+                    url: '/Reservation/UpdateReservationStatus',
+                    type: 'POST',
+                    data: { reservationId: reservationId, status: 'Approved' },
+                    success: function (response) {
+                        if (response.success) {
+                            alert('Reservation approved.');
+                            $('#reservationTable').DataTable().ajax.reload();
+                        } else {
+                            alert('Failed to approve reservation.');
+                        }
+                    }
+                });
+            });
+
+            // Cancel reservation logic
+            $('#reservationTable').on('click', '.cancelReservationBtn', function () {
+                const reservationId = $(this).data('id');
+                $.ajax({
+                    url: '/Reservation/UpdateReservationStatus',
+                    type: 'POST',
+                    data: { reservationId: reservationId, status: 'Cancelled' },
+                    success: function (response) {
+                        if (response.success) {
+                            alert('Reservation cancelled.');
+                            $('#reservationTable').DataTable().ajax.reload();
+                        } else {
+                            alert('Failed to cancel reservation.');
+                        }
+                    }
+                });
+            });
+
+
+
+            //// Edit button functionality
+            //$('#reservationTable').on('click', '.edit-btn', function () {
+            //    var reservationId = $(this).data('id');
+            //    var tableNumber = $(this).data('table');
+            //    var reservationDate = $(this).data('date');
+            //    var numberOfGuests = $(this).data('guests');
+            //    var status = $(this).data('status');
+
+            //    Swal.fire({
+            //        title: 'Edit Reservation',
+            //        html: ` <input type="number" id="editTableNumber" class="swal2-input" placeholder="Table Number" value="${tableNumber}"> <input type="datetime-local" id="editReservationDate" class="swal2-input" value="${reservationDate}"/><input type="number" id="editNumberOfGuests" class="swal2-input" placeholder="Number of Guests" value="${numberOfGuests}"><select id="editStatus" class="swal2-input"><option value="Pending" ${status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Approved" ${status === 'Approved' ? 'selected' : ''}>Approved</option><option value="Cancelled" ${status === 'Cancelled' ? 'selected' : ''}>Cancelled</option></select>`,
+            //        confirmButtonText: 'Save',
+            //        preConfirm: () => {
+            //            return {
+            //                tableNumber: document.getElementById('editTableNumber').value,
+            //                reservationDate: document.getElementById('editReservationDate').value,
+            //                numberOfGuests: document.getElementById('editNumberOfGuests').value,
+            //                status: document.getElementById('editStatus').value
+            //            };
+            //        }
+            //    }).then((result) => {
+            //        if (result.isConfirmed) {
+            //            $.ajax({
+            //                url: '/Reservation/UpdateReservation',
+            //                method: 'POST',
+            //                data: {
+            //                    reservationId: reservationId,
+            //                    tableNumber: result.value.tableNumber,
+            //                    reservationDate: result.value.reservationDate,
+            //                    numberOfGuests: result.value.numberOfGuests,
+            //                    status: result.value.status
+            //                },
+            //                success: function (response) {
+            //                    Swal.fire('Updated!', response.message, 'success');
+            //                    table.ajax.reload(); // Reload DataTable after update
+            //                }
+            //            });
+            //        }
+            //    });
+            //});
+        });
+    </script>
+
+
+</body>
+</html>
+
+  
+
+
+

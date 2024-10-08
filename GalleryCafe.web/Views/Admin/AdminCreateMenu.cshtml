@@ -1,0 +1,297 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - Customer</title>
+
+    <!-- jQuery (necessary for DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap CSS (Bootstrap 5) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- DataTables CSS for table styling -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <link href="~/Content/Dashbord.css" rel="stylesheet" />
+    <style>
+        /* Menu Heading Animation */
+        .heading-animated {
+            font-size: 3rem;
+            color: #fc7f09;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        /* Animation keyframes */
+        @@keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Menu Card Styling */
+        .add-menu-card {
+            background: #fc7f09;
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+            .add-menu-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            }
+
+        .card-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .card-description {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        /* Button Styling */
+        .add-menu-btn {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: #ffffff;
+            color: #fc7f09;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+            .add-menu-btn i {
+                margin-right: 8px;
+            }
+
+            .add-menu-btn:hover {
+                background-color: #fc7f09;
+                color: white;
+                transform: scale(1.05);
+            }
+    </style>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="~/Home/Index">The Gallery Cafe</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="~/Customer/Home">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminProfile">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Profile
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminOrder">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Orders
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminReservation">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Reservation
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Operations</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Menu
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="~/Admin/AdminCreateMenu">Add Food Item</a>
+                                <a class="nav-link" href="~/Admin/AdminMenu">Manage Menu</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Orders
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Users
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="~/Account/RegisterAdmin">User Add</a>
+                                        <a class="nav-link" href="~/Admin/AdminUsers">User Manage</a>
+                                    </nav>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="sb-sidenav-menu-heading">Addons</div>
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Charts
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                     <span>Admin</span>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+
+            @*<----Menu add section--->*@
+            <div class="container mt-5 text-center">
+                <h1 class="mb-4 heading-animated">Menu</h1>
+                <img src="~/Content/img/1003.png" alt="Food" class="food-image" />
+                <div class="add-menu-card">
+                    <h2 class="card-title">Your Menu Items</h2>
+                    <p class="card-description">Click the button below to add a new menu item.</p>
+                    <div class="footer-cart">
+                        <button id="addMenuBtn" class="btn add-menu-btn">
+                            <i class="fas fa-plus"></i> Add Menu Item
+                        </button>
+                    </div>
+                </div>
+            </div>
+            @*<----Menu add section--->*@
+
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; The Gallery Cafe Developed by Mihisara 2024</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Bootstrap JS Bundle (Bootstrap 5) with Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS for table functionality -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables Responsive JS for responsive tables -->
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <!-- Chart.js for charts and data visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/customer.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Show SweetAlert popup to add menu item
+            $('#addMenuBtn').on('click', function () {
+                Swal.fire({
+                    title: 'Add New Menu Item',
+                    html:
+                        '<input id="swal-name" class="swal2-input" placeholder="Name">' +
+                        '<input id="swal-description" class="swal2-input" placeholder="Description">' +
+                        '<input id="swal-price" class="swal2-input" placeholder="Price" type="number" step="0.01">' +
+                        '<input id="swal-cuisineType" class="swal2-input" placeholder="Cuisine Type">' +
+                        '<select id="swal-available" class="swal2-input mb-10">' +
+                            '<option value="true">Available</option>' +
+                            '<option value="false">Not Available</option>' +
+                        '</select>',
+                    focusConfirm: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Submit',
+                    cancelButtonText: 'Cancel',
+                    preConfirm: () => {
+                        return {
+                            name: document.getElementById('swal-name').value,
+                            description: document.getElementById('swal-description').value,
+                            price: document.getElementById('swal-price').value,
+                            cuisineType: document.getElementById('swal-cuisineType').value,
+                            available: document.getElementById('swal-available').value === 'true'
+                        };
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '@Url.Action("AddMenuItem", "Menu")',
+                            type: 'POST',
+                            data: result.value,
+                            success: function (response) {
+                                Swal.fire({
+                                    title: response.success ? 'Success!' : 'Error!',
+                                    text: response.message,
+                                    icon: response.success ? 'success' : 'error',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+
+                                // Clear input fields
+                                $('#swal-name').val('');
+                                $('#swal-description').val('');
+                                $('#swal-price').val('');
+                                $('#swal-cuisineType').val('');
+                                $('#swal-available').val('true');
+                            },
+                            error: function () {
+                                Swal.fire('Error!', 'Failed to add menu item. Please try again.', 'error');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+</html>

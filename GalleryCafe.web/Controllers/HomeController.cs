@@ -20,11 +20,25 @@ namespace GalleryCafe.web.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
+        public ActionResult Gallery()
+        {
             return View();
         }
+
+
+        // Mock Parking Availability (You can replace this with your own logic)
+        public JsonResult GetParkingAvailability()
+        {
+            // Simulate random parking availability for the example
+            bool isParkingAvailable = new Random().Next(0, 2) == 1;
+
+            return Json(new
+            {
+                isAvailable = isParkingAvailable,
+                message = isParkingAvailable ? "Parking is available!" : "Parking is full!"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

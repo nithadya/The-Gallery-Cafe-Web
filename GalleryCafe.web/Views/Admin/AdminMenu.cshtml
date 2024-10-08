@@ -1,0 +1,329 @@
+﻿
+
+
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - Customer</title>
+
+    <!-- jQuery (necessary for DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap CSS (Bootstrap 5) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- DataTables CSS for table styling -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <link href="~/Content/Dashbord.css" rel="stylesheet" />
+    <style>
+
+    </style>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="~/Home/Index">The Gallery Cafe</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="~/Customer/Home">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminProfile">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Profile
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminOrder">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Orders
+                        </a>
+                        <a class="nav-link" href="~/Admin/AdminReservation">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Reservation
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Operations</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Menu
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="~/Admin/AdminCreateMenu">Add Food Item</a>
+                                <a class="nav-link" href="~/Admin/AdminMenu">Manage Menu</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Orders
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Users
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="~/Account/RegisterAdmin">User Add</a>
+                                        <a class="nav-link" href="~/Admin/AdminUsers">User Manage</a>
+                                    </nav>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="sb-sidenav-menu-heading">Addons</div>
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Charts
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    <span>Admin</span>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+
+
+
+
+            <div class="container mt-5">
+                <h2 class="text-center">Admin Menu Management</h2>
+                <table id="menuTable" class="display responsive nowrap table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Menu Item</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Cuisine Type</th>
+                            <th>Available</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+
+
+
+
+
+
+
+
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; The Gallery Cafe Developed by Mihisara 2024</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Bootstrap JS Bundle (Bootstrap 5) with Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS for table functionality -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables Responsive JS for responsive tables -->
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <!-- Chart.js for charts and data visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/customer.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            var table = $('#menuTable').DataTable({
+                responsive: true,
+                ajax: '/Menu/GetAllMenuItems',
+                columns: [
+                    { data: 'Name', title: 'Menu Item', render: function (data) { return `<i class="fas fa-utensils"></i> ${data}`; } },
+                    { data: 'Description', title: 'Description', render: function (data) { return `<i class="fas fa-info-circle"></i> ${data}`; } },
+                    { data: 'Price', title: 'Price', render: function (data) { return `<i class="fas fa-dollar-sign"></i> ${data.toFixed(2)}`; } },
+                    { data: 'CuisineType', title: 'Cuisine Type', render: function (data) { return `<i class="fas fa-globe"></i> ${data}`; } },
+                    { data: 'Available', title: 'Available', render: function (data) { return data ? `<span class="badge bg-success">Yes</span>` : `<span class="badge bg-danger">No</span>`; } },
+                    {
+                        data: null, title: 'Actions', render: function (data, type, row) {return `<button class="btn btn-edit editMenuItemBtn" data-id="${row.MenuItemId}"><i class="fas fa-edit"></i> Edit</button> <button class="btn btn-delete deleteMenuItemBtn" data-id="${row.MenuItemId}"><i class="fas fa-trash-alt"></i> Delete</button>`;
+                        }
+                    }
+                ]
+            });
+
+            // Edit Menu Item with SweetAlert and validation
+            $('#menuTable').on('click', '.editMenuItemBtn', function () {
+                var menuItemId = $(this).data('id');
+                var rowData = table.row($(this).parents('tr')).data();
+
+                Swal.fire({
+                    title: 'Edit Menu Item',
+                    html:
+                        `<div style="display: flex; flex-direction: column; align-items: flex-start;">` +
+                        `<label for="swal-name">Menu Name</label>` +
+                        `<input id="swal-name" class="swal2-input" value="${rowData.Name}" placeholder="Menu Name" style="margin-bottom: 10px;">` +
+                        `<label for="swal-description">Description</label>` +
+                        `<input id="swal-description" class="swal2-input" value="${rowData.Description}" placeholder="Description" style="margin-bottom: 10px;">` +
+                        `<label for="swal-price">Price</label>` +
+                        `<input id="swal-price" class="swal2-input" type="number" value="${rowData.Price}" placeholder="Price" style="margin-bottom: 10px;" min="0>` + 
+                        `<label for="swal-cuisineType">Cuisine Type</label>` +
+                        `<input id="swal-cuisineType" class="swal2-input" value="${rowData.CuisineType}" placeholder="Cuisine Type" style="margin-bottom: 10px;">` +
+                        `<div style="display: flex; align-items: center;">` +
+                        `<input id="swal-available" class="swal2-checkbox" type="checkbox" ${rowData.Available ? 'checked' : ''} style="margin-right: 5px;">` +
+                        `<label for="swal-available">Available</label>` +
+                        `</div>` +
+                        `</div>`,
+                    focusConfirm: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Save',
+                    cancelButtonText: 'Cancel',
+                    preConfirm: () => {
+                        const name = document.getElementById('swal-name').value.trim();
+                        const description = document.getElementById('swal-description').value.trim();
+                        const price = parseFloat(document.getElementById('swal-price').value);
+                        const cuisineType = document.getElementById('swal-cuisineType').value.trim();
+                        const available = document.getElementById('swal-available').checked;
+
+                        // Validation
+                        if (!name || !description || isNaN(price) || price < 0 || !cuisineType) {
+                            Swal.showValidationMessage(`Please fill in all fields correctly.`);
+                            return false;
+                        }
+
+                        return {
+                            menuItemId: menuItemId,
+                            name: name,
+                            description: description,
+                            price: price,
+                            cuisineType: cuisineType,
+                            available: available
+                        };
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Send updated data to the server via AJAX
+                        $.ajax({
+                            url: '/Menu/EditMenuItem',
+                            type: 'POST',
+                            data: result.value,
+                            success: function (response) {
+                                Swal.fire({
+                                    title: response.success ? 'Success!' : 'Error!',
+                                    text: response.message,
+                                    icon: response.success ? 'success' : 'error',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+
+                                if (response.success) {
+                                    // Reload the table after successful update
+                                    table.ajax.reload();
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'An error occurred while processing the request.',
+                                    icon: 'error',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Delete Menu Item with SweetAlert confirmation
+            $('#menuTable').on('click', '.deleteMenuItemBtn', function () {
+                var menuItemId = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/Menu/DeleteMenuItem',
+                            type: 'POST',
+                            data: { menuItemId: menuItemId },
+                            success: function (response) {
+                                Swal.fire({
+                                    title: response.success ? 'Deleted!' : 'Error!',
+                                    text: response.message,
+                                    icon: response.success ? 'success' : 'error',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                                if (response.success) {
+                                    table.ajax.reload();
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+</script>
+
+
+</body>
+</html>

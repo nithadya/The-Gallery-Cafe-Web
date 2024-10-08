@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -52,6 +60,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -120,22 +130,126 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
+    <Compile Include="Controllers\UserManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Menu.cs">
+      <DependentUpon>TGC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>TGC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Reservation.cs">
+      <DependentUpon>TGC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TGC.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TGC.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TGC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TGC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TGC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TGC.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>TGC.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\AdminReservation.css" />
+    <Content Include="Content\Dashbord.css" />
+    <Content Include="Content\home.css" />
+    <Content Include="Content\img\1001.png" />
+    <Content Include="Content\img\1003.png" />
+    <Content Include="Content\img\1004.png" />
+    <Content Include="Content\img\1005.png" />
+    <Content Include="Content\img\1006.png" />
+    <Content Include="Content\img\1007.png" />
+    <Content Include="Content\img\1008.png" />
+    <Content Include="Content\img\2005.png" />
+    <Content Include="Content\img\2006.png" />
+    <Content Include="Content\img\2007.png" />
+    <Content Include="Content\img\2008.png" />
+    <Content Include="Content\img\2009.png" />
+    <Content Include="Content\img\2010.png" />
+    <Content Include="Content\img\2011.png" />
+    <Content Include="Content\img\2012.png" />
+    <Content Include="Content\img\2013.png" />
+    <Content Include="Content\img\2014.png" />
+    <Content Include="Content\img\2015.png" />
+    <Content Include="Content\img\Auth\09.png" />
+    <Content Include="Content\img\gallery-cafe.jpg" />
+    <Content Include="Content\img\gallery-cafe2.jpg" />
+    <Content Include="Content\img\gallery-cafe3.jpg" />
+    <Content Include="Content\img\gallery-cafe4.jpg" />
+    <Content Include="Content\img\home1.jpg" />
+    <Content Include="Content\img\home2.jpg" />
+    <Content Include="Content\img\home3.jpg" />
+    <Content Include="Content\img\layouts\01.png" />
+    <Content Include="Content\img\layouts\02.png" />
+    <Content Include="Content\img\layouts\03.png" />
+    <Content Include="Content\img\layouts\04.png" />
+    <Content Include="Content\img\layouts\1.png" />
+    <Content Include="Content\img\layouts\11.png" />
+    <Content Include="Content\img\layouts\12.png" />
+    <Content Include="Content\img\layouts\13.png" />
+    <Content Include="Content\img\layouts\14.png" />
+    <Content Include="Content\img\layouts\15.png" />
+    <Content Include="Content\img\layouts\16.png" />
+    <Content Include="Content\img\layouts\17.png" />
+    <Content Include="Content\img\layouts\18.png" />
+    <Content Include="Content\img\layouts\19.png" />
+    <Content Include="Content\img\layouts\2.png" />
+    <Content Include="Content\img\layouts\20.png" />
+    <Content Include="Content\img\layouts\21.png" />
+    <Content Include="Content\img\layouts\3.png" />
+    <Content Include="Content\img\layouts\4.png" />
+    <Content Include="Content\img\layouts\40.png" />
+    <Content Include="Content\img\layouts\41.png" />
+    <Content Include="Content\img\layouts\5.png" />
+    <Content Include="Content\img\layouts\6.png" />
+    <Content Include="Content\img\layouts\7.png" />
+    <Content Include="Content\img\layouts\8.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\web-bk.png" />
+    <Content Include="Content\menu.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\TGC.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TGC.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TGC.edmx.diagram">
+      <DependentUpon>TGC.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Models\TGC.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TGC.edmx</DependentUpon>
+      <LastGenOutput>TGC.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\TGC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TGC.edmx</DependentUpon>
+      <LastGenOutput>TGC.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\customer.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -144,8 +258,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Reservation.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -159,20 +275,36 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\RegisterAdmin.cshtml" />
+    <Content Include="Views\Admin\AdminCreateMenu.cshtml" />
+    <Content Include="Views\Admin\AdminHome.cshtml" />
+    <Content Include="Views\Admin\AdminMenu.cshtml" />
+    <Content Include="Views\Admin\AdminOrder.cshtml" />
+    <Content Include="Views\Admin\AdminReservation.cshtml" />
+    <Content Include="Views\Admin\AdminUsers.cshtml" />
+    <Content Include="Views\Customer\CustomerHome.cshtml" />
+    <Content Include="Views\Customer\CustomerOders.cshtml" />
+    <Content Include="Views\Customer\CustomerProfile.cshtml" />
+    <Content Include="Views\Customer\CustomerReservation.cshtml" />
+    <Content Include="Views\Customer\UserProfile.cshtml" />
+    <Content Include="Views\Home\Gallery.cshtml" />
+    <Content Include="Views\Menu\Menu.cshtml" />
+    <Content Include="Views\Reservation\Booking.cshtml" />
+    <Content Include="Views\Account\AdminLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

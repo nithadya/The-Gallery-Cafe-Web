@@ -1,0 +1,458 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - Customer</title>
+
+    <!-- jQuery (necessary for DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap CSS (Bootstrap 5) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- DataTables CSS for table styling -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <link href="~/Content/Dashbord.css" rel="stylesheet" />
+    <style>
+
+:root{
+    --peru: #fc7f09;
+    --black: #222;
+    --white: #fff;
+    --light-black: #666;
+    --light-white: #ccc;
+    --light-bg: #f5f5f5;
+    --dark-bg: rgba(0, 0, 0, 0.7);
+    --border: 1rem solid #aaa;
+    --secondary-color: #ff9f1c;
+    --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, 0.15);
+    --button-hover-color: #f5b041;
+    --border-radius: 12px;
+    --transition-speed: 0.3s;
+    --card-bg-gradient: linear-gradient(145deg, #ff9f1c, #fc7f09);
+
+      /**
+   * TRANSITION
+   */
+
+  --transition-1: 250ms ease;
+  --transition-2: 500ms ease;
+  --transition-3: 1000ms ease;
+
+    /**
+   * BORDER RADIUS
+   */
+
+  --radius-24: 24px;
+  --radius-circle: 50%;
+
+    /**
+   * GRADIENT COLOR
+   */
+
+  --loading-text-gradient: linear-gradient(90deg, transparent 0% 16.66%, var(--smoky-black-3) 33.33% 50%,  transparent 66.66% 75%);
+  --gradient-1: linear-gradient(to top,hsla(0, 0%, 0%, 0.9),hsla(0, 0%, 0%, 0.7),transparent);
+}
+
+     /* General styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--black);
+    margin: 0;
+    padding: 0;
+}
+
+/* Table container */
+.table-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+/* Table styles */
+table.dataTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    background: var(--white);
+    border-radius: var(--radius-24);
+    overflow: hidden;
+}
+
+table.dataTable thead th {
+    background-color: var(--peru);
+    color: var(--white);
+    text-transform: uppercase;
+    padding: 15px;
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+table.dataTable tbody td {
+    padding: 12px;
+    border-bottom: 1px solid var(--light-white);
+}
+
+table.dataTable tbody tr:hover {
+    background-color: var(--light-bg);
+    cursor: pointer;
+}
+
+/* Action buttons */
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color var(--transition-1);
+}
+
+.btn-edit {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.btn-edit:hover {
+    background-color: var(--button-hover-color);
+}
+
+.btn-delete {
+    background-color: var(--peru);
+    color: var(--white);
+}
+
+.btn-delete:hover {
+    background-color: var(--button-hover-color);
+}
+
+/* Responsive breakpoints */
+@@media (max-width: 768px) {
+    table.dataTable thead {
+        display: none;
+    }
+
+    table.dataTable, table.dataTable tbody, table.dataTable tr, table.dataTable td {
+        display: block;
+        width: 100%;
+    }
+
+    table.dataTable tr {
+        margin-bottom: 15px;
+        box-shadow: var(--box-shadow);
+        border-radius: var(--border-radius);
+    }
+
+    table.dataTable td {
+        padding: 15px;
+        text-align: right;
+        position: relative;
+        border-bottom: 1px solid var(--light-white);
+    }
+
+    table.dataTable td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        font-weight: bold;
+        color: var(--light-black);
+    }
+
+    .btn {
+        margin-bottom: 10px;
+    }
+}
+
+/* Animations */
+@@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.table-container {
+    animation: slideIn var(--transition-2) ease;
+}
+.sub-heading, .heading {
+    text-align: center;
+    margin: 0;
+    transition: transform 0.4s ease, color 0.4s ease;
+}
+
+
+.sub-heading {
+    font-size: 1.5rem;
+    color: #fc7f09; /* Peru color */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    animation: fadeInSubHeading 1s forwards;
+    padding-bottom:0;
+}
+
+
+.heading {
+    font-size: 2.5rem;
+    color: #192a56; /* Main heading color */
+    font-weight: bold;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    animation: fadeInHeading 1.5s forwards;
+    padding: 10px 10px 15px 10px;
+}
+
+
+
+@@keyframes fadeInHeading {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@@keyframes fadeInSubHeading {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover effects */
+.heading:hover, .sub-heading:hover {
+    transform: scale(1.05);
+    color: #ff6347; /* Change color on hover */
+}
+
+
+    </style>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="~/Home/Index">The Gallery Cafe</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="~/Customer/CustomerHome">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="~/Customer/CustomerProfile">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Profile
+                        </a>
+                        <a class="nav-link" href="~/Customer/CustomerReservation">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Reservation
+                        </a>
+                        <a class="nav-link" href="~/Customer/CustomerOders">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Orders
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Customer
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+
+            <div class="container">
+                <h2 class="heading" style="margin-top:10px;">Customer Pre-Ordered Items</h2>
+                <table id="orderTable" class="display responsive nowrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Menu Item</th>
+                            <th>Quantity</th>
+                            <th>Order Date</th>
+                            <th>Status</th>
+                            <th>Total Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; The Gallery Cafe Developed by Mihisara 2024</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Bootstrap JS Bundle (Bootstrap 5) with Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS for table functionality -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables Responsive JS for responsive tables -->
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <!-- Chart.js for charts and data visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/customer.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('#orderTable').DataTable({
+                "ajax": {
+                    "url": "/Order/GetCustomerOrders",
+                    "type": "GET",
+                    "dataSrc": function (json) {
+                        if (json.success) {
+                            return json.data;
+                        }
+                        alert(json.message); // Handle error
+                        return [];
+                    }
+                },
+                "columns": [
+                    { "data": "OrderId" },
+                    { "data": "Name" },
+                    { "data": "Quantity" },
+                    { "data": "OrderDate" },
+                    { "data": "Status" },
+                    { "data": "TotalPrice" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            return `<button class="edit-btn" data-id="${row.OrderId}" data-quantity="${row.Quantity}">Edit</button><button class="delete-btn" data-id="${row.OrderId}">Delete</button>`;
+                        }
+                    }
+                ],
+                "responsive": true
+            });
+
+            // Edit button functionality
+            $('#orderTable').on('click', '.edit-btn', function () {
+                var orderId = $(this).data('id');
+                var quantity = $(this).data('quantity');
+
+                Swal.fire({
+                    title: 'Edit Order',
+                    html: `
+                        <input type="number" id="editQuantity" class="swal2-input" value="${quantity}">
+                    `,
+                    confirmButtonText: 'Save',
+                    preConfirm: () => {
+                        var newQuantity = document.getElementById('editQuantity').value;
+                        return { newQuantity: newQuantity };
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/Order/EditOrder',
+                            method: 'POST',
+                            data: {
+                                orderId: orderId,
+                                quantity: result.value.newQuantity
+                            },
+                            success: function (response) {
+                                Swal.fire('Updated!', response.message, 'success');
+                                table.ajax.reload(); // Reload DataTable after update
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Delete button functionality
+            $('#orderTable').on('click', '.delete-btn', function () {
+                var orderId = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/Order/DeleteOrder',
+                            method: 'POST',
+                            data: { orderId: orderId },
+                            success: function (response) {
+                                Swal.fire('Deleted!', response.message, 'success');
+                                table.ajax.reload(); // Reload DataTable after deletion
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,376 @@
+﻿
+    @section Styles {
+    <link href="~/Content/home.css" rel="stylesheet" type="text/css" />
+    }
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+ <style>
+
+        .menu-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            width: 50%;
+            border-radius: var(--border-radius);
+            background-color: var(--peru); /* Peru color */
+            padding: 5px;
+            box-shadow: var(--box-shadow);
+            margin: 0 auto; /* Center the navigation */
+        }
+
+.nav-btn {
+    display: flex;
+    align-items: center; /* Align the image and text */
+    padding: 8px 15px;
+    background-color: var(--white);
+    color: var(--peru);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform var(--transition-speed), background-color var(--transition-speed);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+            .nav-btn:hover {
+                background-color: var(--button-hover-color);
+                transform: translateY(-2px);
+            }
+
+            .cuisine-img {
+    width: 25px;
+    height: 25px;
+    margin-right: 8px; /* Space between the image and text */
+    border-radius: 50%;
+    object-fit: cover; /* Ensure the image is contained properly */
+}
+
+        .menu-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* Adjusted to space out cards */
+            margin: 20px auto; /* Center the menu items */
+            width: 90%; /* Set a maximum width for better alignment */
+        }
+
+        .menu-card {
+            background: var(--card-bg-gradient);
+            border-radius: var(--border-radius);
+            padding: 10px;
+            margin: 10px;
+            width: calc(33% - 20px); /* Responsive width */
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+            .menu-card img {
+                width: 100%;
+                height: auto;
+                border-radius: var(--border-radius);
+            }
+
+            .menu-card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+            }
+
+        /* Pre-Order Button Styles */
+        .order-btn {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+        }
+
+            .order-btn:hover {
+                background-color: var(--button-hover-color);
+                transform: translateY(-3px);
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            }
+
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .menu-card {
+                width: calc(50% - 20px); /* 2 cards per row */
+            }
+
+                .nav-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .cuisine-img {
+        width: 20px;
+        height: 20px;
+    }
+        }
+
+        @@media (max-width: 480px) {
+            .menu-card {
+                width: 100%; /* 1 card per row */
+            }
+    .menu-navigation {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center;
+        width: 100%; /* Full width for mobile */
+    }
+
+    .nav-btn {
+        width: 90%; /* Full-width buttons with some margin on the sides */
+        margin-bottom: 10px;
+        padding: 10px 15px; /* Add more padding for touch-friendly buttons */
+        font-size: 14px;
+        justify-content: center; /* Center the content in the button */
+    }
+
+    .cuisine-img {
+        width: 18px; /* Slightly smaller images */
+        height: 18px;
+        margin-right: 5px;
+    }
+        }
+    </style>
+   <!-- Menu Navigation -->
+<!-- Menu Navigation with small images -->
+<div class="menu-navigation cuisine-buttons">
+    <button class="nav-btn cuisine-btn" onclick="loadMenu('Sri Lankan')">
+        <img src="/Content/img/1004.png" alt="Sri Lankan" class="cuisine-img"> Sri Lankan
+    </button>
+    <button class="nav-btn cuisine-btn" onclick="loadMenu('Chinese')">
+        <img src="~/Content/img/1001.png" alt="Chinese" class="cuisine-img"> Chinese
+    </button>
+    <button class="nav-btn cuisine-btn" onclick="loadMenu('Italian')">
+        <img src="/Content/img/1005.png" alt="Italian" class="cuisine-img"> Italian
+    </button>
+    <button class="nav-btn cuisine-btn" onclick="loadMenu('Indian')">
+        <img src="/Content/img/1003.png" alt="Indian" class="cuisine-img"> Indian
+    </button>
+    <button class="nav-btn cuisine-btn" onclick="loadMenu('Japanese')">
+        <img src="/Content/img/1004.png" alt="Japanese" class="cuisine-img"> Japanese
+    </button>
+</div>
+
+<!-- Menu Items -->
+<div class="menu-items" id="menu-items">
+    <div class="menu-card">
+        <img src="~/Content/img/chicken_rice.png" alt="Spicy Chicken Rice">
+        <h4>Spicy Chicken Rice</h4>
+        <p>A flavorful Sri Lankan style chicken rice with spices</p>
+        <p>Price: LKR.1300.00</p>
+        <button class="order-btn" onclick="addToOrder(2005)">Pre-Order</button>
+    </div>
+
+    <div class="menu-card">
+        <img src="~/Content/img/kottu_roti.png" alt="Kottu Roti Delight">
+        <h4>Kottu Roti Delight</h4>
+        <p>Famous Kottu Roti with mixed vegetables and chicken</p>
+        <p>Price: LKR.850.00</p>
+        <button class="order-btn" onclick="addToOrder(2006)">Pre-Order</button>
+    </div>
+
+    <div class="menu-card">
+        <img src="~/Content/img/spaghetti_carbonara.png" alt="Creamy Spaghetti Carbonara">
+        <h4>Creamy Spaghetti Carbonara</h4>
+        <p>Classic Italian pasta in a creamy sauce</p>
+        <p>Price: LKR.1600.00</p>
+        <button class="order-btn" onclick="addToOrder(2007)">Pre-Order</button>
+    </div>
+
+    <div class="menu-card">
+        <img src="~/Content/img/margherita_pizza.png" alt="Fresh Margherita Pizza">
+        <h4>Fresh Margherita Pizza</h4>
+        <p>Pizza topped with fresh mozzarella and basil</p>
+        <p>Price: LKR.1900.00</p>
+        <button class="order-btn" onclick="addToOrder(2008)">Pre-Order</button>
+    </div>
+
+    <div class="menu-card">
+        <img src="~/Content/img/fried_noodles.png" alt="Classic Fried Noodles">
+        <h4>Classic Fried Noodles</h4>
+        <p>Stir-fried noodles with vegetables and chicken</p>
+        <p>Price: LKR.950.00</p>
+        <button class="order-btn" onclick="addToOrder(2009)">Pre-Order</button>
+    </div>
+
+    <div class="menu-card">
+        <img src="~/Content/img/sweet_sour_chicken.png" alt="Tangy Sweet and Sour Chicken">
+        <h4>Tangy Sweet and Sour Chicken</h4>
+        <p>Crispy chicken in a sweet and sour sauce</p>
+        <p>Price: LKR.1450.00</p>
+        <button class="order-btn" onclick="addToOrder(2010)">Pre-Order</button>
+    </div>
+
+    <div class="menu-card">
+        <img src="~/Content/img/herb_garlic_bread.png" alt="Herb Garlic Bread">
+        <h4>Herb Garlic Bread</h4>
+        <p>Garlic bread topped with fresh herbs</p>
+        <p>Price: LKR.550.00</p>
+        <button class="order-btn" onclick="addToOrder(2011)">Pre-Order</button>
+    </div>
+
+    <div class="menu-card">
+        <img src="~/Content/img/seafood_alfredo.png" alt="Seafood Alfredo Pasta">
+        <h4>Seafood Alfredo Pasta</h4>
+        <p>Italian pasta with a creamy seafood sauce</p>
+        <p>Price: LKR.2100.00</p>
+        <button class="order-btn" onclick="addToOrder(2012)">Pre-Order</button>
+    </div>
+
+    <div class="menu-card">
+        <img src="~/Content/img/prawn_fried_rice.png" alt="Prawn Fried Rice">
+        <h4>Prawn Fried Rice</h4>
+        <p>Delicious fried rice with prawns and spices</p>
+        <p>Price: LKR.1200.00</p>
+        <button class="order-btn" onclick="addToOrder(2013)">Pre-Order</button>
+    </div>
+
+    <div class="menu-card">
+        <img src="~/Content/img/spicy_cuttlefish.png" alt="Spicy Hot Butter Cuttlefish">
+        <h4>Spicy Hot Butter Cuttlefish</h4>
+        <p>Fried cuttlefish in a spicy sauce</p>
+        <p>Price: LKR.1700.00</p>
+        <button class="order-btn" onclick="addToOrder(2014)">Pre-Order</button>
+    </div>
+</div>
+
+
+<!-- SweetAlert and AJAX Script -->
+<script>
+        // Function to load menu items based on the selected cuisine
+        function loadMenu(cuisineType) {
+            $.ajax({
+                url: '/Menu/GetMenuByCuisine', // Adjust this URL according to your routes
+                type: 'GET',
+                data: { cuisineType: cuisineType },
+                success: function (response) {
+                    if (response.success) {
+                        renderMenuItems(response.data); // Call the function to render the menu items
+                    } else {
+                        showAlert('Error', response.message, 'error');
+                    }
+                },
+                error: function () {
+                    showAlert('Error', 'Failed to load menu items.', 'error');
+                }
+            });
+        }
+
+        // Function to render menu items dynamically
+        function renderMenuItems(menuItems) {
+            const menuContainer = $('#menu-items');
+            menuContainer.empty(); // Clear previous items
+
+            if (menuItems.length === 0) {
+                menuContainer.append('<p>No items available for this cuisine.</p>');
+                return;
+            }
+
+            menuItems.forEach(item => {
+                menuContainer.append(`<div class="menu-card"><img src="${item.ImagePath}" alt="${item.Name}"><h4>${item.Name}</h4><p>${item.Description}</p><p>Price: $${item.Price.toFixed(2)}</p><button class="order-btn" onclick="addToOrder(${item.MenuItemId})">Pre-Order</button></div>`);
+            });
+        }
+
+        // Function to handle adding an order
+        function addToOrder(menuItemId) {
+            $.get('/Account/GetCurrentUser', function (response) {
+                if (response.success) {
+                    // If the user is logged in, show the quantity prompt
+                    Swal.fire({
+                        title: 'Enter Quantity',
+                        input: 'number',
+                        inputLabel: 'Quantity',
+                        inputPlaceholder: 'Enter the quantity',
+                        showCancelButton: true,
+                        confirmButtonText: 'Pre-order',
+                        cancelButtonText: 'Cancel',
+                        inputValidator: (value) => {
+                            if (!value || value <= 0) {
+                                return 'Please enter a valid quantity!';
+                            }
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const quantity = result.value;
+                            placeOrder(menuItemId, quantity);
+                        }
+                    });
+                } else {
+                    // If the user is not logged in, show a login prompt
+                    Swal.fire({
+                        title: 'Please log in',
+                        text: 'You must log in to place an order.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Log in',
+                        cancelButtonText: 'Cancel',
+                        preConfirm: () => {
+                            window.location.href = '/Account/Login';
+                        }
+                    });
+                }
+            });
+        }
+
+        // Function to place the order via AJAX
+        function placeOrder(menuItemId, quantity) {
+            $.ajax({
+                url: '/Order/PreOrder',
+                type: 'POST',
+                data: { menuItemId: menuItemId, quantity: quantity },
+                success: function (response) {
+                    if (response.success) {
+                        updateCartCount(response.orderCount);
+                        Swal.fire({
+                            title: 'Order Successful!',
+                            text: response.message,
+                            icon: 'success',
+                            showCancelButton: true,
+                            confirmButtonText: 'Preview Your Orders',
+                            cancelButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '/Customer/CustomerOders'; // Redirect to order management page
+                            }
+                        });
+                    } else {
+                        showAlert('Error', response.message, 'error');
+                    }
+                },
+                error: function () {
+                    showAlert('Error', 'Failed to place the order.', 'error');
+                }
+            });
+        }
+
+        // Function to update cart count in the header
+        function updateCartCount(count) {
+            $('#cart-count').text(count);
+        }
+
+        // Utility function to show SweetAlert popups
+        function showAlert(title, text, icon) {
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: icon,
+                confirmButtonText: 'OK'
+            });
+        }
+
+        // Load initial menu items on page load
+        $(document).ready(function () {
+            loadMenu('Sri Lankan'); // Load default cuisine
+        });
+</script>
+
+
+
