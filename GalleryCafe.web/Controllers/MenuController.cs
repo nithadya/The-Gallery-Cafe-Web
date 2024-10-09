@@ -12,10 +12,7 @@ namespace GalleryCafe.web.Controllers
         // GET: Menu
         public ActionResult Menu()
         {
-            if (Session["UserId"] == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+
             return View();
         }
 
@@ -75,7 +72,7 @@ namespace GalleryCafe.web.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception (implement your logging mechanism here)
+                
                 return Json(new { success = false, message = "An error occurred: " + ex.Message });
             }
         }

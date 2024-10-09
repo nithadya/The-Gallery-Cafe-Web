@@ -7,8 +7,8 @@
 <style>
 
 .table-icon {
-        width: 150px; /* Adjusted for small size */
-        height: 150px; /* Adjusted for small size */
+        width: 150px; 
+        height: 150px; 
         margin: 10px;
         display: flex;
         align-items: center;
@@ -17,15 +17,15 @@
         cursor: pointer;
         font-size: 1.5rem;
         color: #fff;
-        transition: background-color 0.3s ease; /* Smooth transition */
+        transition: background-color 0.3s ease; 
     }
 
     .available {
-        background-color: #28a745; /* Green for available */
+        background-color: #28a745; 
     }
 
     .booked {
-        background-color: #dc3545; /* Red for booked */
+        background-color: #dc3545; 
     }
 
     .table-icon:hover {
@@ -177,18 +177,18 @@
         }
 
         .Home-about-img {
-            width: 400px;  /* Fixed width for circle */
-            height: 400px; /* Fixed height for circle */
-            overflow: hidden; /* Prevent overflow */
-            border-radius: var(--radius-circle); /* Make the image circular */
+            width: 400px;  
+            height: 400px; 
+            overflow: hidden;
+            border-radius: var(--radius-circle); 
             animation: rotate 10s linear infinite;
-            margin-left: 20px; /* Add margin to separate from content */
+            margin-left: 20px;
         }
 
         .Home-about-img img {
-            width: 100%; /* Make the image responsive */
-            height: auto; /* Maintain aspect ratio */
-            object-fit: cover; /* Cover the container */
+            width: 100%;
+            height: auto; 
+            object-fit: cover; 
         }
 
         @@keyframes rotate {
@@ -217,8 +217,8 @@
         }
 
         .Home-icon-image {
-            font-size: 50px; /* Adjust the icon size as needed */
-            color: var(--peru); /* Icon color, change as necessary */
+            font-size: 50px; 
+            color: var(--peru); 
         }
 
         .Home-icon p {
@@ -235,12 +235,12 @@
 
             .Home-about-content {
                 margin-right: 0;
-                margin-bottom: 20px; /* Add margin below content on mobile */
+                margin-bottom: 20px;
             }
 
             .Home-about-img {
-                width: 300px;  /* Smaller fixed width for mobile */
-                height: 300px; /* Smaller fixed height for mobile */
+                width: 300px; 
+                height: 300px; 
             }
 
             .Home-about-content h3 {
@@ -860,7 +860,7 @@
 <script>
     $(document).ready(function () {
         // Initialize the map using Leaflet.js
-        var map = L.map('map').setView([40.7128, -74.0060], 13); // Coordinates for New York, change to your restaurant location
+        var map = L.map('map').setView([6.9271, 79.9612], 13); // Coordinates for Colombo, Sri Lanka
 
         // Add OpenStreetMap tiles to the map
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -868,14 +868,14 @@
         }).addTo(map);
 
         // Add a marker for the restaurant location
-        var restaurantMarker = L.marker([40.7128, -74.0060]).addTo(map)
+        var restaurantMarker = L.marker([6.9271, 79.9612]).addTo(map)
             .bindPopup('Our Restaurant')
             .openPopup();
 
         // Function to update parking availability dynamically
         function updateParkingAvailability() {
             $.ajax({
-                url: '/Home/GetParkingAvailability', // Action method to get parking availability
+                url: '/Home/GetParkingAvailability',
                 method: 'GET',
                 success: function (data) {
                     $('#parking-status').text(data.message);

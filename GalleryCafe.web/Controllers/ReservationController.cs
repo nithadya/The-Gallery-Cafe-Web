@@ -13,10 +13,6 @@ namespace GalleryCafe.web.Controllers
 
         public ActionResult Booking()
         {
-            if (Session["UserId"] == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
             return View();
         }
 
@@ -52,7 +48,7 @@ namespace GalleryCafe.web.Controllers
                     {
                         r.ReservationId,
                         r.TableNumber,
-                        r.ReservationDate,  // Keep it as DateTime for the view to handle
+                        r.ReservationDate,  
                         r.NumberOfGuests,
                         r.Status
                     });
@@ -61,7 +57,7 @@ namespace GalleryCafe.web.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception (you might want to use a logging framework)
+               
                 return Json(new { success = false, message = "An error occurred while retrieving reservations.", error = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }

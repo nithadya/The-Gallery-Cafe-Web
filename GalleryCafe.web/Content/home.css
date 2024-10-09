@@ -264,8 +264,8 @@ section{
 
 }
 
-.header .header-icon i,
-.header .header-icon a{
+
+.header .header-icon .header-icon-main{
    height:30px;
     width:30px;
     cursor:pointer;
@@ -280,15 +280,15 @@ section{
 
 }
 
-.header .header-icon i:hover,
-.header .header-icon a:hover{
+
+.header .header-icon .header-icon-main:hover{
     color:var(--peru);
     background:#eee;
     transform:rotate(360deg);
 }
 
-.header .header-icon i:focus,
-.header .header-icon a:focus{
+
+.header .header-icon .header-icon-main:focus{
     color:var(--white);
     background:var(--peru);
     transform:rotate(360deg);

@@ -27,16 +27,16 @@ searchSectionClose.addEventListener('click', () => {
 /*-----Search-Bar-End-----*/
 
 
-//var swiper = new Swiper(".home-slider", {
+var swiper = new Swiper(".home-slider", {
     
-//    grabCursor: true,
-//    loop: true,
-//    centeredSlides: true,
-//    autoplay: {
-//        delay: 5000,
-//    },
+    grabCursor: true,
+    loop: true,
+    centeredSlides: true,
+    autoplay: {
+        delay: 5000,
+    },
     
-//});
+});
 
 
 

@@ -495,7 +495,7 @@ table.dataTable tbody tr:hover {
                         data: {
                             orderId: orderId,
                             quantity: result.value.newQuantity,
-                            status: 'Pending' // You can modify this as needed
+                            status: 'Pending'
                         },
                         success: function (response) {
                             Swal.fire('Updated!', response.message, 'success');

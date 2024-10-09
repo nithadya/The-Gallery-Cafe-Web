@@ -346,49 +346,6 @@
                     }
                 });
             });
-
-
-
-            //// Edit button functionality
-            //$('#reservationTable').on('click', '.edit-btn', function () {
-            //    var reservationId = $(this).data('id');
-            //    var tableNumber = $(this).data('table');
-            //    var reservationDate = $(this).data('date');
-            //    var numberOfGuests = $(this).data('guests');
-            //    var status = $(this).data('status');
-
-            //    Swal.fire({
-            //        title: 'Edit Reservation',
-            //        html: ` <input type="number" id="editTableNumber" class="swal2-input" placeholder="Table Number" value="${tableNumber}"> <input type="datetime-local" id="editReservationDate" class="swal2-input" value="${reservationDate}"/><input type="number" id="editNumberOfGuests" class="swal2-input" placeholder="Number of Guests" value="${numberOfGuests}"><select id="editStatus" class="swal2-input"><option value="Pending" ${status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Approved" ${status === 'Approved' ? 'selected' : ''}>Approved</option><option value="Cancelled" ${status === 'Cancelled' ? 'selected' : ''}>Cancelled</option></select>`,
-            //        confirmButtonText: 'Save',
-            //        preConfirm: () => {
-            //            return {
-            //                tableNumber: document.getElementById('editTableNumber').value,
-            //                reservationDate: document.getElementById('editReservationDate').value,
-            //                numberOfGuests: document.getElementById('editNumberOfGuests').value,
-            //                status: document.getElementById('editStatus').value
-            //            };
-            //        }
-            //    }).then((result) => {
-            //        if (result.isConfirmed) {
-            //            $.ajax({
-            //                url: '/Reservation/UpdateReservation',
-            //                method: 'POST',
-            //                data: {
-            //                    reservationId: reservationId,
-            //                    tableNumber: result.value.tableNumber,
-            //                    reservationDate: result.value.reservationDate,
-            //                    numberOfGuests: result.value.numberOfGuests,
-            //                    status: result.value.status
-            //                },
-            //                success: function (response) {
-            //                    Swal.fire('Updated!', response.message, 'success');
-            //                    table.ajax.reload(); // Reload DataTable after update
-            //                }
-            //            });
-            //        }
-            //    });
-            //});
         });
     </script>
 

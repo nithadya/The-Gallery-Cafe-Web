@@ -343,7 +343,7 @@
     $(document).ready(function() {
         // Fetch data for orders, users, and reservations
         $.ajax({
-            url: '/Admin/GetStats',  // This will hit the GetStats method in your HomeController
+            url: '/Admin/GetStats', 
             method: 'GET',
             success: function(response) {
                 $('#total-orders').text(response.totalOrders);

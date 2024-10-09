@@ -204,7 +204,7 @@
         $(document).ready(function () {
             // Fetch the logged-in user's data using AJAX
             $.ajax({
-                url: '@Url.Action("GetCurrentUser", "Account")', // Calls the GetCurrentUser action in AccountController
+                url: '@Url.Action("GetCurrentUser", "Account")',
                 method: 'GET',
                 success: function (response) {
                     if (response.success) {

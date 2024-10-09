@@ -275,7 +275,7 @@
         // Function to load menu items based on the selected cuisine
         function loadMenu(cuisineType) {
             $.ajax({
-                url: '/Menu/GetMenuByCuisine', // Adjust this URL according to your routes
+                url: '/Menu/GetMenuByCuisine', 
                 type: 'GET',
                 data: { cuisineType: cuisineType },
                 success: function (response) {

@@ -12,15 +12,15 @@
             margin-top: 20px;
             width: 50%;
             border-radius: var(--border-radius);
-            background-color: var(--peru); /* Peru color */
+            background-color: var(--peru);
             padding: 5px;
             box-shadow: var(--box-shadow);
-            margin: 0 auto; /* Center the navigation */
+            margin: 0 auto; 
         }
 
 .nav-btn {
     display: flex;
-    align-items: center; /* Align the image and text */
+    align-items: center; 
     padding: 8px 15px;
     background-color: var(--white);
     color: var(--peru);
@@ -41,17 +41,17 @@
             .cuisine-img {
     width: 25px;
     height: 25px;
-    margin-right: 8px; /* Space between the image and text */
+    margin-right: 8px;
     border-radius: 50%;
-    object-fit: cover; /* Ensure the image is contained properly */
+    object-fit: cover;
 }
 
         .menu-items {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between; /* Adjusted to space out cards */
-            margin: 20px auto; /* Center the menu items */
-            width: 90%; /* Set a maximum width for better alignment */
+            justify-content: space-between; 
+            margin: 20px auto; 
+            width: 90%; 
         }
 
         .menu-card {
@@ -59,7 +59,7 @@
             border-radius: var(--border-radius);
             padding: 10px;
             margin: 10px;
-            width: calc(33% - 20px); /* Responsive width */
+            width: calc(33% - 20px); 
             box-shadow: var(--box-shadow);
             text-align: center;
             transition: transform var(--transition-speed), box-shadow var(--transition-speed);
@@ -99,7 +99,7 @@
         /* Responsive adjustments */
         @@media (max-width: 768px) {
             .menu-card {
-                width: calc(50% - 20px); /* 2 cards per row */
+                width: calc(50% - 20px);
             }
 
                 .nav-btn {
@@ -115,25 +115,25 @@
 
         @@media (max-width: 480px) {
             .menu-card {
-                width: 100%; /* 1 card per row */
+                width: 100%;
             }
     .menu-navigation {
         display: flex;
-        flex-direction: column; /* Stack buttons vertically */
+        flex-direction: column; 
         align-items: center;
-        width: 100%; /* Full width for mobile */
+        width: 100%; 
     }
 
     .nav-btn {
-        width: 90%; /* Full-width buttons with some margin on the sides */
+        width: 90%; 
         margin-bottom: 10px;
-        padding: 10px 15px; /* Add more padding for touch-friendly buttons */
+        padding: 10px 15px;
         font-size: 14px;
-        justify-content: center; /* Center the content in the button */
+        justify-content: center; 
     }
 
     .cuisine-img {
-        width: 18px; /* Slightly smaller images */
+        width: 18px;
         height: 18px;
         margin-right: 5px;
     }
@@ -248,7 +248,7 @@
         // Function to load menu items based on the selected cuisine
         function loadMenu(cuisineType) {
             $.ajax({
-                url: '/Menu/GetMenuByCuisine', // Adjust this URL according to your routes
+                url: '/Menu/GetMenuByCuisine',
                 type: 'GET',
                 data: { cuisineType: cuisineType },
                 success: function (response) {
