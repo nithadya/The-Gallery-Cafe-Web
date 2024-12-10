@@ -21,7 +21,22 @@
          .user-dropdown {
     position: relative; 
 }
+.cart{
+    position:relative;
+}
 
+
+ .cart #cart-count{
+    position:absolute;
+    padding:4px 5px;
+    top:-5px;
+    right:-3px;
+    font-size:11px;
+    background-color:red;
+    border-radius:50px;
+
+
+}
 .dropdown-menu {
     position: absolute;
     background-color: white; 
@@ -75,7 +90,7 @@
         </nav>
         <div class="header-icon" id="header-icon">
             <i class="fas fa-search header-icon-main" id="search-icon"></i>
-            <a class="fa-solid fa-cart-shopping header-icon-main" href="~/Customer/CustomerHome" id="cart-icon" style="text-decoration:none;"><span id="cart-count"></span></a>
+            <a class="cart fa-solid fa-cart-shopping header-icon-main" href="~/Customer/CustomerOders" id="cart-icon" style="text-decoration:none;"><span id="cart-count"></span></a>
             <div class="user-dropdown">
                 <a id="user-icon" style="text-decoration:none;" class="fas fa-solid fa-user header-icon-main" href="#" onclick="toggleDropdown(event)"></a>
                 <ul class="dropdown-menu" id="user-dropdown-menu" style="display: none;">

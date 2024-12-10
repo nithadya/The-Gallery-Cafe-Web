@@ -85,6 +85,11 @@ namespace GalleryCafe.web.Controllers
         }
 
 
+
+
+
+
+
         // 2. Action to handle admin registration with validation
 
         [HttpPost]
@@ -149,6 +154,9 @@ namespace GalleryCafe.web.Controllers
                 return Json(new { success = false, message = "An unexpected error occurred." });
             }
         }
+
+
+
 
 
 

@@ -54,7 +54,7 @@
             }
 
         .page-height {
-            height: 100vh;
+           
             display: flex;
             justify-content: center;
             align-items: center;
@@ -132,14 +132,14 @@
                                 </div>
                                 <div class="form-row row-cols-1 row-cols-md-2">
                                     <!-- Password input -->
-                                    <div class="form-outline mb-4">
+                                    <div class="col mb-4">
                                         <input type="password" id="password" class="form-control" required minlength="6" />
                                         <label class="form-label" for="password">Password</label>
                                         <div class="invalid-feedback">Password must be at least 6 characters long.</div>
                                     </div>
 
                                     <!-- Mobile Number input -->
-                                    <div class="form-outline mb-4">
+                                    <div class="col mb-4">
                                         <input type="tel" id="mobileNumber" class="form-control" placeholder="Mobile Number" required pattern="[0-9]{10,15}" />
                                         <label class="form-label" for="mobileNumber">Mobile Number</label>
                                         <div class="invalid-feedback">Please provide a valid mobile number.</div>
@@ -147,7 +147,7 @@
                                 </div>
 
                                     <!-- Gender input -->
-                                    <div class="form-outline mb-4">
+                                    <div class="col mb-4">
                                         <select id="gender" class="form-control" required>
                                             <option value="" disabled selected>Select your gender</option>
                                             <option value="Male">Male</option>

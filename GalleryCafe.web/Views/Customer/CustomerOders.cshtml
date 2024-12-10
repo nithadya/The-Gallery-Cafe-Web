@@ -119,24 +119,21 @@ table.dataTable tbody tr:hover {
 }
 
 /* Action buttons */
-.btn {
-    display: inline-block;
-    padding: 8px 12px;
-    font-size: 0.9rem;
-    border-radius: var(--border-radius);
-    text-align: center;
-    cursor: pointer;
-    transition: background-color var(--transition-1);
-}
+ button {
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 8px 12px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            cursor: pointer;
+            transition: background-color var(--transition-1);
+ }
 
-.btn-edit {
-    background-color: var(--secondary-color);
-    color: var(--white);
-}
+ button:hover {
+            background-color: var(--button-hover-color);
+        }
 
-.btn-edit:hover {
-    background-color: var(--button-hover-color);
-}
+
 
 .btn-delete {
     background-color: var(--peru);

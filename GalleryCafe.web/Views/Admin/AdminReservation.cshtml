@@ -180,13 +180,9 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="~/Customer/Home">
+                        <a class="nav-link" href="~/Admin/AdminHome">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
-                        </a>
-                        <a class="nav-link" href="~/Admin/AdminProfile">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Profile
                         </a>
                         <a class="nav-link" href="~/Admin/AdminOrder">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -210,7 +206,7 @@
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Orders
+                            Users
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
@@ -263,7 +259,44 @@
                     </table>
                 </div>
             </div>
-
+            <!-- Edit Reservation Modal -->
+            <div class="modal fade" id="editReservationModal" tabindex="-1" aria-labelledby="editReservationModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editReservationModalLabel">Edit Reservation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="editReservationId">
+                            <div class="mb-3">
+                                <label for="editTableNumber" class="form-label">Table Number</label>
+                                <input type="text" class="form-control" id="editTableNumber">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editReservationDate" class="form-label">Reservation Date</label>
+                                <input type="date" class="form-control" id="editReservationDate">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editGuests" class="form-label">Guests</label>
+                                <input type="number" class="form-control" id="editGuests">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editStatus" class="form-label">Status</label>
+                                <select class="form-select" id="editStatus">
+                                    <option value="Confirmed">Confirmed</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="saveEdit()">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
@@ -347,6 +380,59 @@
                 });
             });
         });
+
+
+        // Function to save changes made in the edit modal
+        function saveEdit() {
+            var reservationData = {
+                ReservationId: $('#editReservationId').val(),
+                TableNumber: $('#editTableNumber').val(),
+                ReservationDate: $('#editReservationDate').val(),
+                Guests: $('#editGuests').val(),
+                Status: $('#editStatus').val()
+            };
+
+            $.ajax({
+                url: '/Reservation/UpdateReservation',
+                type: 'POST',
+                data: reservationData,
+                success: function () {
+                    $('#reservationTable').DataTable().ajax.reload();
+                    $('#editReservationModal').modal('hide');
+                    Swal.fire('Success', 'Reservation updated successfully!', 'success');
+                },
+                error: function () {
+                    Swal.fire('Error', 'Unable to update reservation.', 'error');
+                }
+            });
+        }
+
+        // Function to delete a reservation
+        function deleteReservation(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/Reservation/DeleteReservation/${id}`,
+                        type: 'POST',
+                        success: function () {
+                            $('#reservationTable').DataTable().ajax.reload();
+                            Swal.fire('Deleted!', 'Your reservation has been deleted.', 'success');
+                        },
+                        error: function () {
+                            Swal.fire('Error', 'Unable to delete reservation.', 'error');
+                        }
+                    });
+                }
+            });
+        }
     </script>
 
 

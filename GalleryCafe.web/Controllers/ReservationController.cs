@@ -20,7 +20,7 @@ namespace GalleryCafe.web.Controllers
         public JsonResult GetAvailableTables()
         {
             // Example: Total tables range from 101 to 120
-            var tables = Enumerable.Range(101, 30).ToList();
+            var tables = Enumerable.Range(101, 20).ToList();
             var bookedTables = db.Reservations
                                  .Where(r => r.Status == "Approved" || r.Status == "Pending")
                                  .Select(r => r.TableNumber)

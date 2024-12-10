@@ -2,9 +2,6 @@
 @{
     Layout = null;
 }
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,63 +27,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <link href="~/Content/Dashbord.css" rel="stylesheet" />
-    <style>
-        html {
-            font-size: 13px;
-        }
-
-        /* General Card Styling */
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-            border-radius: 10px;
-        }
-
-            .card:hover {
-                transform: scale(1.05);
-            }
-
-            .card h2 {
-                font-size: 2.5rem;
-                font-weight: bold;
-            }
-
-        .card-footer .stretched-link {
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .card-footer .fa-angle-right {
-            transition: transform 0.3s;
-        }
-
-        .card-footer:hover .fa-angle-right {
-            transform: translateX(5px);
-        }
-
-        /* Responsive Breakpoints */
-        @@media (max-width: 768px) {
-            .card h2 {
-                font-size: 2rem;
-            }
-
-            .card-footer .stretched-link {
-                font-size: 0.9rem;
-            }
-        }
-
-        @@media (max-width: 480px) {
-            .card h2 {
-                font-size: 1.8rem;
-            }
-
-            .card-footer .stretched-link {
-                font-size: 0.85rem;
-            }
-        }
-    </style>
-
 </head>
 
 <body class="sb-nav-fixed">
@@ -107,7 +47,6 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
                     <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                     <li><hr class="dropdown-divider" /></li>
                     <li><a class="dropdown-item" href="#!">Logout</a></li>
@@ -121,13 +60,9 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="~/Customer/Home">
+                        <a class="nav-link" href="~/Admin/AdminHome">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
-                        </a>
-                        <a class="nav-link" href="~/Admin/AdminProfile">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Profile
                         </a>
                         <a class="nav-link" href="~/Admin/AdminOrder">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -151,7 +86,7 @@
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Orders
+                            Users
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
@@ -182,7 +117,6 @@
             </nav>
         </div>
         <div id="layoutSidenav_content">
-
             <main style="background-image: url('../../Content/img/dashboard.png'); background-position:center; background-size:cover;background-repeat:no-repeat; ">
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Admin</h1>
@@ -254,32 +188,9 @@
                             </div>
                         </div>
                     </div>
-
-
-
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            DataTable Example
-                        </div>
-                        <div class="card-body">
-                            <table id="usersTable" class="table table-bordered table-striped" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>UserId</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
                 </div>
             </main>
+
 
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
@@ -295,67 +206,35 @@
             </footer>
         </div>
     </div>
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap 4 JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- DataTables JS -->
+    <!-- Bootstrap JS Bundle (Bootstrap 5) with Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS for table functionality -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <!-- DataTables Responsive JS for responsive tables -->
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <!-- Chart.js for charts and data visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/customer.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-
-    <script>
-        $(document).ready(function () {
-
-
-            // Initialize DataTable
-            $('#usersTable').DataTable({
-                scrollX: true,
-                ajax: {
-                    url: '/Table/GetUsers', // Your API endpoint here
-                    type: "GET",
-                    dataType: "json",
-                    error: function (xhr, status, error) {
-                        console.error("Error fetching data: ", error);
-                    }
-                },
-                columns: [
-                    { data: "UserId" },
-                    { data: "FirstName" },
-                    { data: "LastName" },
-                    { data: "Email" },
-                    { data: "Role" },
-                    {
-                        data: null,
-                        render: function (data, type, row) {
-                            return `<button class='btn btn-primary btn-sm' onclick='editUser(${row.UserId})'>Update</button><button class='btn btn-danger btn-sm' onclick='deleteUser(${row.UserId})'>Delete</button>`;
+            <script>
+                $(document).ready(function () {
+                    // Fetch data for orders, users, and reservations
+                    $.ajax({
+                        url: '/Admin/GetStats',
+                        method: 'GET',
+                        success: function (response) {
+                            $('#total-orders').text(response.totalOrders);
+                            $('#total-users').text(response.totalUsers);
+                            $('#total-reservations').text(response.totalReservations);
+                        },
+                        error: function (err) {
+                            console.error('Failed to fetch data', err);
                         }
-                    }
-                ]
-
-
-            });
-        });
-    </script>
-    <script>
-    $(document).ready(function() {
-        // Fetch data for orders, users, and reservations
-        $.ajax({
-            url: '/Admin/GetStats', 
-            method: 'GET',
-            success: function(response) {
-                $('#total-orders').text(response.totalOrders);
-                $('#total-users').text(response.totalUsers);
-                $('#total-reservations').text(response.totalReservations);
-            },
-            error: function(err) {
-                console.error('Failed to fetch data', err);
-            }
-        });
-    });
-    </script>
+                    });
+                });
+            </script>
 </body>
 </html>
 

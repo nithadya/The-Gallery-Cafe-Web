@@ -285,7 +285,6 @@
     <Content Include="Views\Admin\AdminOrder.cshtml" />
     <Content Include="Views\Admin\AdminReservation.cshtml" />
     <Content Include="Views\Admin\AdminUsers.cshtml" />
-    <Content Include="Views\Customer\CustomerHome.cshtml" />
     <Content Include="Views\Customer\CustomerOders.cshtml" />
     <Content Include="Views\Customer\CustomerProfile.cshtml" />
     <Content Include="Views\Customer\CustomerReservation.cshtml" />
